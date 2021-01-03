@@ -1,0 +1,3 @@
+class AdditionNode extends InfixExpressionNode {
+
+}

@@ -1,0 +1,3 @@
+class DivisionNode extends InfixExpressionNode {
+
+}

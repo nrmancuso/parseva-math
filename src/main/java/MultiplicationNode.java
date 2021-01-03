@@ -1,0 +1,3 @@
+class MultiplicationNode extends InfixExpressionNode {
+
+}
