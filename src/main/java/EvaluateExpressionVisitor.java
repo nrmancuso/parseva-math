@@ -31,7 +31,7 @@ import java.lang.reflect.Method;
 
 /**
  * This class handles the evaluation of all expressions by visiting each
- * node of our math AST and performing operations as it traverses the tree.
+ * node of the math AST and performing operations as it traverses the tree.
  */
 public class EvaluateExpressionVisitor extends MathAstVisitor<Double> {
 
