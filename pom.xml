@@ -26,6 +26,11 @@
             <version>3.18.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>8.39</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -124,7 +129,7 @@
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>8.39-SNAPSHOT</version>
+                        <version>8.39</version>
                     </dependency>
                 </dependencies>
             </plugin>
