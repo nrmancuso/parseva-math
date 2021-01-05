@@ -36,10 +36,9 @@ import java.lang.reflect.Method;
 public class EvaluateExpressionVisitor extends MathAstVisitor<Double>{
 
     /**
-     * Visit an addtion node.
+     * {@inheritDoc}
      *
-     * @param node addition node
-     * @return the sum of the node's descendants
+     * This implementation returns the sum of this node's two descendants.
      */
     @Override
     Double visit(AdditionNode node) {
@@ -47,10 +46,9 @@ public class EvaluateExpressionVisitor extends MathAstVisitor<Double>{
     }
 
     /**
-     * Visit a subtraction node.
+     * {@inheritDoc}
      *
-     * @param node subtraction node
-     * @return the difference of the node's descendants
+     * This implementation returns the difference of this node's two descendants.
      */
     @Override
     Double visit(SubtractionNode node) {
@@ -58,10 +56,9 @@ public class EvaluateExpressionVisitor extends MathAstVisitor<Double>{
     }
 
     /**
-     * Visit a multiplication node.
+     * {@inheritDoc}
      *
-     * @param node multiplication node
-     * @return the product of the node's descendants
+     * This implementation returns the product of this node's two descendants.
      */
     @Override
     Double visit(MultiplicationNode node) {
@@ -69,10 +66,9 @@ public class EvaluateExpressionVisitor extends MathAstVisitor<Double>{
     }
 
     /**
-     * Visit a division node.
+     * {@inheritDoc}
      *
-     * @param node division node
-     * @return the quotient of the node's descendants
+     * This implementation returns the quotient of two descendants.
      */
     @Override
     Double visit(DivisionNode node) {
@@ -80,10 +76,9 @@ public class EvaluateExpressionVisitor extends MathAstVisitor<Double>{
     }
 
     /**
-     * Visit a negation node.
+     * {@inheritDoc}
      *
-     * @param node negate node
-     * @return the value of the node's inner node, negated
+     * This implementation returns the value of the node's inner node, negated.
      */
     @Override
     Double visit(NegateNode node) {
@@ -91,15 +86,14 @@ public class EvaluateExpressionVisitor extends MathAstVisitor<Double>{
     }
 
     /**
-     * This method extracts a method from a MethodNode and applies it
-     * to a specified argument.
+     * {@inheritDoc}
      *
-     * @param node the Math function (method) to use in our evaluation.
-     * @return the result of the expression evaluated by the function.
+     * This implementation extracts a method from a MethodNode and applies it
+     *    to a specified argument, returning the result.
      */
     @Override
     Double visit(MethodNode node) {
-        Method mathMethod = node.getFunction();
+        final Method mathMethod = node.getFunction();
         Double returnVal = Double.NaN;
         try {
             returnVal = (Double) mathMethod.invoke(mathMethod.getClass(), visit(node.getArguement()));
@@ -110,10 +104,9 @@ public class EvaluateExpressionVisitor extends MathAstVisitor<Double>{
     }
 
     /**
-     * Visit a number (numerical expression) node.
+     * {@inheritDoc}
      *
-     * @param node number node
-     * @return the value of the numerical expression
+     * This implementation returns the value of the numerical expression.
      */
     @Override
     Double visit(NumberNode node) {
