@@ -1,5 +1,9 @@
 grammar Math;
 
+@header{
+ package parsevamath.tools.grammar;
+}
+
 compilationUnit
     :   expr EOF
     ;

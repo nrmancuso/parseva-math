@@ -35,10 +35,10 @@
                 <version>4.8-1</version>
                 <configuration>
                     <visitor>true</visitor>
-                    <listener>true</listener>
+                    <listener>false</listener>
                     <inputEncoding>UTF-8</inputEncoding>
                     <sourceDirectory>
-                        src/main/grammar
+                        src/main/resources/parsevamath/tools/grammar
                     </sourceDirectory>
                 </configuration>
                 <executions>
@@ -96,6 +96,7 @@
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.1.1</version>
                 <configuration>
+                    <sourceDirectories>${project.build.sourceDirectory}</sourceDirectories>
                     <configLocation>config/checkstyle_checks.xml</configLocation>
                     <encoding>UTF-8</encoding>
                     <consoleOutput>true</consoleOutput>
@@ -107,6 +108,7 @@
                         <id>checkstyle-check</id>
                         <phase>verify</phase>
                         <configuration>
+                            <sourceDirectories>${project.build.sourceDirectory}</sourceDirectories>
                             <configLocation>config/checkstyle_checks.xml</configLocation>
                             <encoding>UTF-8</encoding>
                             <consoleOutput>true</consoleOutput>

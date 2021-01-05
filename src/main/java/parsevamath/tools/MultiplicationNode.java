@@ -26,9 +26,11 @@
  * For more information, please refer to <http://unlicense.org/>
  */
 
+package parsevamath.tools;
+
 /**
- * This class represents a subtraction node in the ast.
+ * This class represents a multiplication node in the ast.
  */
-class SubtractionNode extends InfixExpressionNode {
+class MultiplicationNode extends InfixExpressionNode {
 
 }

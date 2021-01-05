@@ -26,9 +26,33 @@
  * For more information, please refer to <http://unlicense.org/>
  */
 
-/**
- * This class represents an addition node in the ast.
- */
-class AdditionNode extends InfixExpressionNode {
+package parsevamath.tools;
 
+/**
+ * This class represents a numerical value(inner node), negated, in the ast.
+ */
+class NegateNode extends InfixExpressionNode {
+
+    /**
+     * This node is the actual numerical value of this node.
+     */
+    private ExpressionNode innerNode;
+
+    /**
+     * Gets the inner node of this negation node.
+     *
+     * @return innerNode
+     */
+    public ExpressionNode getInnerNode() {
+        return innerNode;
+    }
+
+    /**
+     * Sets the inner node.
+     *
+     * @param innerNode the node to set as inner.
+     */
+    public void setInnerNode(ExpressionNode innerNode) {
+        this.innerNode = innerNode;
+    }
 }

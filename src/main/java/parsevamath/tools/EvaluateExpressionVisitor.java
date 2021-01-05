@@ -26,6 +26,8 @@
  * For more information, please refer to <http://unlicense.org/>
  */
 
+package parsevamath.tools;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -33,7 +35,7 @@ import java.lang.reflect.Method;
  * This class handles the evaluation of all expressions by visiting each
  * node of the math AST and performing operations as it traverses the tree.
  */
-public class EvaluateExpressionVisitor extends MathAstVisitor<Double> {
+public class EvaluateExpressionVisitor extends AbstractMathAstVisitor<Double> {
 
     /**
      * {@inheritDoc}
@@ -88,7 +90,7 @@ public class EvaluateExpressionVisitor extends MathAstVisitor<Double> {
     /**
      * {@inheritDoc}
      *
-     * <p>This implementation extracts a method from a MethodNode and applies it
+     * <p>This implementation extracts a method from a parsevamath.tools.MethodNode and applies it
      * to a specified argument, returning the result.
      */
     @Override
@@ -97,7 +99,7 @@ public class EvaluateExpressionVisitor extends MathAstVisitor<Double> {
         Double returnVal = Double.NaN;
         try {
             returnVal =
-                    (Double) mathMethod.invoke(mathMethod.getClass(), visit(node.getArgument()));
+                (Double) mathMethod.invoke(mathMethod.getClass(), visit(node.getArgument()));
         }
         catch (IllegalAccessException | InvocationTargetException exception) {
             exception.printStackTrace();

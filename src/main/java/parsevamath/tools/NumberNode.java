@@ -26,12 +26,42 @@
  * For more information, please refer to <http://unlicense.org/>
  */
 
+package parsevamath.tools;
+
 /**
- * This class represents the ancestor of all ast nodes.
+ * This class represents a numerical expression node in the ast.
  */
-@SuppressWarnings("MarkerInterface")
-public interface ExpressionNode {
+class NumberNode implements ExpressionNode {
 
+    /**
+     * The numerical value of this number node.
+     */
+    private Double value;
+
+    /**
+     * Constructor for NumberNode class.
+     *
+     * @param value the numerical value of this node
+     */
+    NumberNode(Double value) {
+        this.value = value;
+    }
+
+    /**
+     * Gets the value of this number node.
+     *
+     * @return the value of this node
+     */
+    public Double getValue() {
+        return value;
+    }
+
+    /**
+     * Sets the value of this number node.
+     *
+     * @param value the value to set
+     */
+    public void setValue(Double value) {
+        this.value = value;
+    }
 }
-
-

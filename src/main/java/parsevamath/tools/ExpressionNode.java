@@ -26,52 +26,13 @@
  * For more information, please refer to <http://unlicense.org/>
  */
 
-import java.lang.reflect.Method;
+package parsevamath.tools;
 
 /**
- * This class represents a mathematical function node in the ast.
+ * This class represents the ancestor of all ast nodes.
+ *
+ * @noinspection MarkerInterface
  */
-class MethodNode implements ExpressionNode {
-    
-    /** Mathmatical function that this node represents */
-    private Method function;
-    
-    /** Argument to supply to function */
-    private ExpressionNode argument;
+public interface ExpressionNode {
 
-    /**
-     * Get the function that this node uses.
-     *
-     * @return method from java.lang.Math
-     */
-    public Method getFunction() {
-        return function;
-    }
-
-    /**
-     * Sets the function that this node uses.
-     *
-     * @param function the method from java.lang.Math to set
-     */
-    public void setFunction(Method function) {
-        this.function = function;
-    }
-
-    /**
-     * Gets the argument supplied to this node to evaluate.
-     *
-     * @return numerical expression
-     */
-    public ExpressionNode getArgument() {
-        return argument;
-    }
-
-    /**
-     * Sets the numerical argument for this node to evaluate.
-     *
-     * @param argument numerical expression
-     */
-    public void setArgument(ExpressionNode argument) {
-        this.argument = argument;
-    }
 }

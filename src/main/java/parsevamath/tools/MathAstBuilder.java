@@ -1,6 +1,6 @@
 /*
  * Copyright (c) parseva-math  2021.
- * <p>This is free and unencumbered software released into the public domain.
+ * This is free and unencumbered software released into the public domain.
  *
  * Anyone is free to copy, modify, publish, use, compile, sell, or
  * distribute this software, either in source code form or as a compiled
@@ -26,11 +26,26 @@
  * For more information, please refer to <http://unlicense.org/>
  */
 
-import org.antlr.v4.runtime.Token;
+package parsevamath.tools;
 
 import java.lang.reflect.Method;
 
-public class MathAstBuilder extends MathBaseVisitor<ExpressionNode>{
+import org.antlr.v4.runtime.Token;
+
+import parsevamath.tools.grammar.MathBaseVisitor;
+import parsevamath.tools.grammar.MathLexer;
+import parsevamath.tools.grammar.MathParser;
+
+/**
+ * This class builds an ast for parseva-math grammar using the visitor pattern.
+ */
+public class MathAstBuilder extends MathBaseVisitor<ExpressionNode> {
+
+    /**
+     * This string is used when throwing IllegalStateException on an
+     * unknown token.
+     */
+    private static final String UNEXPECTED_TOKEN = "Unexpected token: ";
 
     /**
      * {@inheritDoc}
@@ -57,13 +72,13 @@ public class MathAstBuilder extends MathBaseVisitor<ExpressionNode>{
      */
     @Override
     public ExpressionNode visitInfixExpr(MathParser.InfixExprContext ctx) {
-        Token token = ctx.op;
-        InfixExpressionNode node = switch (token.getType()) {
+        final Token token = ctx.op;
+        final InfixExpressionNode node = switch (token.getType()) {
             case MathLexer.OP_ADD -> new AdditionNode();
             case MathLexer.OP_SUB -> new SubtractionNode();
             case MathLexer.OP_MUL -> new MultiplicationNode();
             case MathLexer.OP_DIV -> new DivisionNode();
-            default -> throw new IllegalStateException("Unexpected value: " + token.getType());
+            default -> throw new IllegalStateException(UNEXPECTED_TOKEN + token.getType());
         };
 
         node.setLeft(visit(ctx.left));
@@ -83,15 +98,15 @@ public class MathAstBuilder extends MathBaseVisitor<ExpressionNode>{
      */
     @Override
     public ExpressionNode visitUnaryExpr(MathParser.UnaryExprContext ctx) {
-        Token token = ctx.op;
+        final Token token = ctx.op;
         return switch (token.getType()) {
             case MathLexer.OP_ADD -> visit(ctx.expr());
             case MathLexer.OP_SUB -> {
-                NegateNode negateNode = new NegateNode();
+                final NegateNode negateNode = new NegateNode();
                 negateNode.setInnerNode(visit(ctx.expr()));
                 yield negateNode;
             }
-            default -> throw new IllegalStateException("Unexpected value: " + token.getType());
+            default -> throw new IllegalStateException(UNEXPECTED_TOKEN + token.getType());
         };
     }
 
@@ -106,16 +121,17 @@ public class MathAstBuilder extends MathBaseVisitor<ExpressionNode>{
      */
     @Override
     public ExpressionNode visitFuncExpr(MathParser.FuncExprContext ctx) {
-        String methodName = ctx.func.getText();
+        final String methodName = ctx.func.getText();
 
         // Node to return
-        MethodNode methodNode = new MethodNode();
+        final MethodNode methodNode = new MethodNode();
         methodNode.setArgument(visit(ctx.expr()));
 
         try {
-            Method method = Math.class.getMethod(methodName, double.class);
+            final Method method = Math.class.getMethod(methodName, double.class);
             methodNode.setFunction(method);
-        } catch (NoSuchMethodException e) {
+        }
+        catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
 

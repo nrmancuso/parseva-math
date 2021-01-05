@@ -26,11 +26,14 @@
  * For more information, please refer to <http://unlicense.org/>
  */
 
+package parsevamath.tools;
+
 /**
  * This class defines abstract visit methods for each node type.
+ *
  * @param <T> the return type of the visit method.
  */
-public abstract class MathAstVisitor<T>  {
+public abstract class AbstractMathAstVisitor<T> {
 
     /**
      * Visit an addition node.
@@ -95,6 +98,7 @@ public abstract class MathAstVisitor<T>  {
      *
      * @param node the expression node to process
      * @return the result of calling visit on node
+     * @throws IllegalStateException on unknown token
      */
     public T visit(ExpressionNode node) {
         return switch (node.getClass().getSimpleName()) {

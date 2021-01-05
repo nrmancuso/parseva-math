@@ -26,50 +26,11 @@
  * For more information, please refer to <http://unlicense.org/>
  */
 
+package parsevamath.tools;
+
 /**
- * This class represents an infixed operator in the ast.
+ * This class represents an addition node in the ast.
  */
-class InfixExpressionNode implements ExpressionNode {
+class AdditionNode extends InfixExpressionNode {
 
-    /** Left operand */
-    private ExpressionNode left;
-
-    /** Right operand */
-    private ExpressionNode right;
-
-    /**
-     * Gets the left descendant of this node.
-     *
-     * @return left operand
-     */
-    public ExpressionNode getLeft() {
-        return left;
-    }
-
-    /**
-     * Sets the left descendant of this node.
-     *
-     * @param left the node to set as left hand operand
-     */
-    public void setLeft(ExpressionNode left) {
-        this.left = left;
-    }
-
-    /**
-     * Gets the right descendant of this node.
-     *
-     * @return right operand
-     */
-    public ExpressionNode getRight() {
-        return right;
-    }
-
-    /**
-     * Sets the right descendant of this node.
-     *
-     * @param right the node to set as right hand operand
-     */
-    public void setRight(ExpressionNode right) {
-        this.right = right;
-    }
 }

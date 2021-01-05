@@ -26,47 +26,58 @@
  * For more information, please refer to <http://unlicense.org/>
  */
 
-import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.CharStreams;
-import org.antlr.v4.runtime.CommonTokenStream;
+package parsevamath.tools;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+
+import parsevamath.tools.grammar.MathLexer;
+import parsevamath.tools.grammar.MathParser;
+
+/**
+ * Main driver class for parseva-math.
+ */
 public final class Main {
 
     private Main() {
         // Prevent instantiation of Main
     }
 
+    /**
+     * For now, this method runs only in "interactive" mode.
+     *
+     * @param args need to implement
+     */
     public static void main(String... args) {
-        Scanner scan = new Scanner(System.in, StandardCharsets.UTF_8);
+        final Scanner scan = new Scanner(System.in, StandardCharsets.UTF_8);
         while (true) {
 
             System.out.print("> ");
-            String exprInput = scan.nextLine();
+            final String exprInput = scan.nextLine();
 
             if (exprInput.isBlank()) {
                 break;
             }
 
-            //String exprInput = "sqrt(4)";
-
-            CharStream codePointCharStream = CharStreams.fromString(exprInput);
-            MathLexer lexer = new MathLexer(codePointCharStream);
-            CommonTokenStream tokenStream = new CommonTokenStream(lexer);
-            MathParser parser = new MathParser(tokenStream);
+            final CharStream codePointCharStream = CharStreams.fromString(exprInput);
+            final MathLexer lexer = new MathLexer(codePointCharStream);
+            final CommonTokenStream tokenStream = new CommonTokenStream(lexer);
+            final MathParser parser = new MathParser(tokenStream);
 
             try {
-                MathParser.CompilationUnitContext mathTree = parser.compilationUnit();
-                ExpressionNode ast = new MathAstBuilder().visitCompilationUnit(mathTree);
+                final MathParser.CompilationUnitContext mathTree = parser.compilationUnit();
+                final ExpressionNode ast = new MathAstBuilder().visitCompilationUnit(mathTree);
 
-                // Figure out good way to print ast, maybe make new visitor, such as pretty-print visitor
-                Double value = new EvaluateExpressionVisitor().visit(ast);
+                final Double value = new EvaluateExpressionVisitor().visit(ast);
 
-                String output = String.format("= %f\n", value);
+                final String output = String.format("= %f\n", value);
                 System.out.print(output);
-            } catch (Exception e){
+            }
+            catch (Exception e) {
                 System.out.println(e.getMessage());
             }
             System.out.println();

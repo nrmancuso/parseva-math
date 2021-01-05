@@ -27,12 +27,6 @@
  */
 
 /**
- * This is a utility class for parseva-math.
+ * Package information lives here.
  */
-public final class MathUtils {
-
-    private MathUtils() {
-        // Prevent instantiation of MathUtils
-    }
-
-}
+package parsevamath.tools;

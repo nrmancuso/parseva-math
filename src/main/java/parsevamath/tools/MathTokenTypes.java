@@ -26,37 +26,49 @@
  * For more information, please refer to <http://unlicense.org/>
  */
 
+package parsevamath.tools;
+
 /**
- * This class represents a numerical expression node in the ast.
+ * This class is used to decouple the token types from the generated ANTLR
+ * code.
  */
-class NumberNode implements ExpressionNode {
-
-    /** The numerical value of this number node */
-    private Double value;
+public final class MathTokenTypes {
 
     /**
-     * Constructor for NumberNode class.
-     * @param value the numerical value of this node
+     * This token is the addition operator.
      */
-    public NumberNode(Double value) {
-        this.value = value;
-    }
+    public static final int OP_ADD = 3;
 
     /**
-     * Gets the value of this number node.
-     *
-     * @return the value of this node
+     * This token is the subtraction operator.
      */
-    public Double getValue() {
-        return value;
-    }
+    public static final int OP_SUB = 4;
 
     /**
-     * Sets the value of this number node.
-     *
-     * @param value the value to set
+     * This token is the multiplication operator.
      */
-    public void setValue(Double value) {
-        this.value = value;
+    public static final int OP_MUL = 5;
+
+    /**
+     * This token is the division operator.
+     */
+    public static final int OP_DIV = 6;
+
+    /**
+     * This token is a numerical expression.
+     */
+    public static final int NUM = 7;
+
+    /**
+     * This token is an identifier.
+     */
+    public static final int ID = 8;
+
+    /**
+     * This token is for whitespace.
+     */
+    public static final int WS = 9;
+
+    private MathTokenTypes() {
     }
 }

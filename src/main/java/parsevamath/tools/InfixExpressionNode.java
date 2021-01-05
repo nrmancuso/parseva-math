@@ -26,9 +26,56 @@
  * For more information, please refer to <http://unlicense.org/>
  */
 
-/**
- * This class represents the division node in the ast.
- */
-class DivisionNode extends InfixExpressionNode {
+package parsevamath.tools;
 
+/**
+ * This class represents an infixed operator in the ast.
+ */
+class InfixExpressionNode implements ExpressionNode {
+
+    /**
+     * Left operand of this infix operator.
+     */
+    private ExpressionNode left;
+
+    /**
+     * Right operand of this infix operator.
+     */
+    private ExpressionNode right;
+
+    /**
+     * Gets the left descendant of this node.
+     *
+     * @return left operand
+     */
+    public ExpressionNode getLeft() {
+        return left;
+    }
+
+    /**
+     * Sets the left descendant of this node.
+     *
+     * @param left the node to set as left hand operand
+     */
+    public void setLeft(ExpressionNode left) {
+        this.left = left;
+    }
+
+    /**
+     * Gets the right descendant of this node.
+     *
+     * @return right operand
+     */
+    public ExpressionNode getRight() {
+        return right;
+    }
+
+    /**
+     * Sets the right descendant of this node.
+     *
+     * @param right the node to set as right hand operand
+     */
+    public void setRight(ExpressionNode right) {
+        this.right = right;
+    }
 }
