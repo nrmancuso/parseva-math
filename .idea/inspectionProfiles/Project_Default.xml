@@ -2588,6 +2588,7 @@
           <option value="CanBeFinal" />
           <option value="OverlyCoupledMethod" />
           <option value="SwitchStatementWithTooManyBranches" />
+          <option value="MarkerInterface" />
         </list>
       </option>
     </inspection_tool>

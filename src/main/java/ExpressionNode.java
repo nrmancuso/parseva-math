@@ -29,6 +29,7 @@
 /**
  * This class represents the ancestor of all ast nodes.
  */
+@SuppressWarnings("MarkerInterface")
 public sealed interface ExpressionNode permits InfixExpressionNode, MethodNode, NumberNode {
 
 }
