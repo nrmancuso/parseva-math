@@ -33,12 +33,12 @@ import java.lang.reflect.Method;
  * This class handles the evaluation of all expressions by visiting each
  * node of our math AST and performing operations as it traverses the tree.
  */
-public class EvaluateExpressionVisitor extends MathAstVisitor<Double>{
+public class EvaluateExpressionVisitor extends MathAstVisitor<Double> {
 
     /**
      * {@inheritDoc}
      *
-     * This implementation returns the sum of this node's two descendants.
+     * <p>This implementation returns the sum of this node's two descendants.
      */
     @Override
     Double visit(AdditionNode node) {
@@ -48,7 +48,7 @@ public class EvaluateExpressionVisitor extends MathAstVisitor<Double>{
     /**
      * {@inheritDoc}
      *
-     * This implementation returns the difference of this node's two descendants.
+     * <p>This implementation returns the difference of this node's two descendants.
      */
     @Override
     Double visit(SubtractionNode node) {
@@ -58,7 +58,7 @@ public class EvaluateExpressionVisitor extends MathAstVisitor<Double>{
     /**
      * {@inheritDoc}
      *
-     * This implementation returns the product of this node's two descendants.
+     * <p>This implementation returns the product of this node's two descendants.
      */
     @Override
     Double visit(MultiplicationNode node) {
@@ -68,7 +68,7 @@ public class EvaluateExpressionVisitor extends MathAstVisitor<Double>{
     /**
      * {@inheritDoc}
      *
-     * This implementation returns the quotient of two descendants.
+     * <p>This implementation returns the quotient of two descendants.
      */
     @Override
     Double visit(DivisionNode node) {
@@ -78,27 +78,29 @@ public class EvaluateExpressionVisitor extends MathAstVisitor<Double>{
     /**
      * {@inheritDoc}
      *
-     * This implementation returns the value of the node's inner node, negated.
+     * <p>This implementation returns the value of the node's inner node, negated.
      */
     @Override
     Double visit(NegateNode node) {
-        return - visit(node.getInnerNode());
+        return -visit(node.getInnerNode());
     }
 
     /**
      * {@inheritDoc}
      *
-     * This implementation extracts a method from a MethodNode and applies it
-     *    to a specified argument, returning the result.
+     * <p>This implementation extracts a method from a MethodNode and applies it
+     * to a specified argument, returning the result.
      */
     @Override
     Double visit(MethodNode node) {
         final Method mathMethod = node.getFunction();
         Double returnVal = Double.NaN;
         try {
-            returnVal = (Double) mathMethod.invoke(mathMethod.getClass(), visit(node.getArgument()));
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
+            returnVal =
+                    (Double) mathMethod.invoke(mathMethod.getClass(), visit(node.getArgument()));
+        }
+        catch (IllegalAccessException | InvocationTargetException exception) {
+            exception.printStackTrace();
         }
         return returnVal;
     }
@@ -106,7 +108,7 @@ public class EvaluateExpressionVisitor extends MathAstVisitor<Double>{
     /**
      * {@inheritDoc}
      *
-     * This implementation returns the value of the numerical expression.
+     * <p>This implementation returns the value of the numerical expression.
      */
     @Override
     Double visit(NumberNode node) {

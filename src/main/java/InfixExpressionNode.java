@@ -29,7 +29,7 @@
 /**
  * This class represents an infixed operator in the ast.
  */
-non-sealed class InfixExpressionNode implements ExpressionNode {
+class InfixExpressionNode implements ExpressionNode {
 
     /** Left operand */
     private ExpressionNode left;

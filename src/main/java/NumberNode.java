@@ -29,7 +29,7 @@
 /**
  * This class represents a numerical expression node in the ast.
  */
-public non-sealed class NumberNode implements ExpressionNode {
+class NumberNode implements ExpressionNode {
 
     /** The numerical value of this number node */
     private Double value;

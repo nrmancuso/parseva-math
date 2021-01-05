@@ -31,7 +31,7 @@ import java.lang.reflect.Method;
 /**
  * This class represents a mathematical function node in the ast.
  */
-non-sealed class MethodNode implements ExpressionNode {
+class MethodNode implements ExpressionNode {
     
     /** Mathmatical function that this node represents */
     private Method function;
