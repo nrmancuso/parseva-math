@@ -96,7 +96,7 @@ public class EvaluateExpressionVisitor extends MathAstVisitor<Double>{
         final Method mathMethod = node.getFunction();
         Double returnVal = Double.NaN;
         try {
-            returnVal = (Double) mathMethod.invoke(mathMethod.getClass(), visit(node.getArguement()));
+            returnVal = (Double) mathMethod.invoke(mathMethod.getClass(), visit(node.getArgument()));
         } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }

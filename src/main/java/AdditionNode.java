@@ -27,7 +27,7 @@
  */
 
 /**
- * This class represents an addition operation.
+ * This class represents an addition node in the ast.
  */
 class AdditionNode extends InfixExpressionNode {
 
