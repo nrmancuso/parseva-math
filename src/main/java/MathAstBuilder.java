@@ -1,6 +1,6 @@
 /*
  * Copyright (c) parseva-math  2021.
- * This is free and unencumbered software released into the public domain.
+ * <p>This is free and unencumbered software released into the public domain.
  *
  * Anyone is free to copy, modify, publish, use, compile, sell, or
  * distribute this software, either in source code form or as a compiled
@@ -35,7 +35,7 @@ public class MathAstBuilder extends MathBaseVisitor<ExpressionNode>{
     /**
      * {@inheritDoc}
      *
-     * This implementation returns the node resulting from calling visit on
+     * <p>This implementation returns the node resulting from calling visit on
      * this context rule.
      *
      * @param ctx rule context
@@ -49,7 +49,7 @@ public class MathAstBuilder extends MathBaseVisitor<ExpressionNode>{
     /**
      * {@inheritDoc}
      *
-     * This implementation creates a new ExpressionNode, determines the correct
+     * <p>This implementation creates a new ExpressionNode, determines the correct
      * operation to assign to this node, and sets it's operands.
      *
      * @param ctx rule context
@@ -74,7 +74,7 @@ public class MathAstBuilder extends MathBaseVisitor<ExpressionNode>{
     /**
      * {@inheritDoc}
      *
-     * This implementation determines the type of unary expression used on
+     * <p>This implementation determines the type of unary expression used on
      * an inner node (essentially handling negation) and creates a new
      * ExpressionNode.
      *
@@ -98,7 +98,7 @@ public class MathAstBuilder extends MathBaseVisitor<ExpressionNode>{
     /**
      * {@inheritDoc}
      *
-     * This implementation uses reflection to get the specified method
+     * <p>This implementation uses reflection to get the specified method
      * from java.lang.Math and creates a new MethodNode.
      *
      * @param ctx rule context
@@ -125,7 +125,7 @@ public class MathAstBuilder extends MathBaseVisitor<ExpressionNode>{
     /**
      * {@inheritDoc}
      *
-     * This implementation instantiates and initializes a new NumberNode.
+     * <p>This implementation instantiates and initializes a new NumberNode.
      *
      * @param ctx rule context
      * @return new NumberNode
@@ -138,7 +138,7 @@ public class MathAstBuilder extends MathBaseVisitor<ExpressionNode>{
     /**
      * {@inheritDoc}
      *
-     * This implementation simply allows for the evaluation of its expression
+     * <p>This implementation simply allows for the evaluation of its expression
      * in the appropriate order by calling visit().
      *
      * @param ctx rule context
