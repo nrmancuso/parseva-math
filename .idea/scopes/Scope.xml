@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Scope" pattern="!src:MathBaseVisitor&amp;&amp;!src:MathLexer&amp;&amp;!src:MathParser&amp;&amp;!src:MathVisitor" />
+</component>

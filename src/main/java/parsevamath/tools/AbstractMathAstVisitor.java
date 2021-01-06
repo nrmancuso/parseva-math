@@ -96,9 +96,9 @@ public abstract class AbstractMathAstVisitor<T> {
      * This method handles the double dispatch of the visit method for
      * each concrete node type.
      *
+     * @param node ExpressionNode to visit
      * @return the result of calling visit on node
-     * @throws IllegalStateException on unknown token
      * @noinspection OverloadedMethodsWithSameNumberOfParameters
      */
-     abstract T visit(ExpressionNode node);
+    abstract T visit(ExpressionNode node);
 }

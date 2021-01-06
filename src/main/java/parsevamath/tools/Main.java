@@ -34,7 +34,6 @@ import java.util.Scanner;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
-import org.tinylog.Logger;
 
 import parsevamath.tools.grammar.MathLexer;
 import parsevamath.tools.grammar.MathParser;
@@ -52,6 +51,7 @@ public final class Main {
      * For now, this method runs only in "interactive" mode.
      *
      * @param args need to implement
+     * @noinspection UseOfSystemOutOrSystemErr
      */
     public static void main(String... args) {
         final Scanner scan = new Scanner(System.in, StandardCharsets.UTF_8);
@@ -69,19 +69,15 @@ public final class Main {
             final CommonTokenStream tokenStream = new CommonTokenStream(lexer);
             final MathParser parser = new MathParser(tokenStream);
 
-            try {
-                final MathParser.CompilationUnitContext mathTree = parser.compilationUnit();
-                final ExpressionNode ast = new MathAstBuilder().visitCompilationUnit(mathTree);
+            final MathParser.CompilationUnitContext mathTree = parser.compilationUnit();
+            final ExpressionNode ast = new MathAstBuilder().visitCompilationUnit(mathTree);
 
-                final Double value = new EvaluateExpressionVisitor().visit(ast);
+            final Double value = new EvaluateExpressionVisitor().visit(ast);
 
-                final String output = String.format("= %f\n", value);
-                System.out.print(output);
-            }
-            catch (Exception exception) {
-                Logger.info(exception);
-            }
+            final String output = String.format("= %f\n", value);
+            System.out.print(output);
             System.out.println();
         }
+        scan.close();
     }
 }
