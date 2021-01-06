@@ -198,6 +198,7 @@ Pageflow
 Params
 parseva
 parsevamath
+pdf
 Placeholders
 plugin
 pmd
@@ -295,5 +296,6 @@ xpath
 xsd
 xsi
 Xslt
+xslx
 Yaml
 zh
