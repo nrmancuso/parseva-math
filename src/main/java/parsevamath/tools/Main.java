@@ -34,6 +34,7 @@ import java.util.Scanner;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.tinylog.Logger;
 
 import parsevamath.tools.grammar.MathLexer;
 import parsevamath.tools.grammar.MathParser;
@@ -77,8 +78,8 @@ public final class Main {
                 final String output = String.format("= %f\n", value);
                 System.out.print(output);
             }
-            catch (Exception e) {
-                System.out.println(e.getMessage());
+            catch (Exception exception) {
+                Logger.info(exception);
             }
             System.out.println();
         }

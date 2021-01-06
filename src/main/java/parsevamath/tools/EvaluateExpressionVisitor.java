@@ -31,6 +31,8 @@ package parsevamath.tools;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import org.tinylog.Logger;
+
 /**
  * This class handles the evaluation of all expressions by visiting each
  * node of the math AST and performing operations as it traverses the tree.
@@ -102,7 +104,11 @@ public class EvaluateExpressionVisitor extends AbstractMathAstVisitor<Double> {
                 (Double) mathMethod.invoke(mathMethod.getClass(), visit(node.getArgument()));
         }
         catch (IllegalAccessException | InvocationTargetException exception) {
-            exception.printStackTrace();
+            String infoString = "Failed to invoke method '"
+                + mathMethod.getName()
+                + "' on arguement '"
+                + node.getArgument();
+            Logger.info(infoString, exception);
         }
         return returnVal;
     }
