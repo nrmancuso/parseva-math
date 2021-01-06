@@ -29,5 +29,5 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Check spelling
-      - uses: check-spelling/check-spelling@0.0.17-alpha
+        uses: check-spelling/check-spelling@0.0.17-alpha
 
