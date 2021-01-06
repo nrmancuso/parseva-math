@@ -1,0 +1,9 @@
+(?:^|/)vendor/
+(?:^|/)yarn\.lock$
+LICENSE
+\.pdf$
+\.png$
+\.xslx?$
+^CONTRIBUTING\.md$
+^\.github/action/spell-check/
+^\.github/workflows/
