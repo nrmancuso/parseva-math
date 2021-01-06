@@ -223,6 +223,7 @@ Rgb
 Rtl
 rx
 Sameline
+screenshots
 scrollbar
 Scss
 sdk
