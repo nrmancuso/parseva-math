@@ -31,6 +31,7 @@ package parsevamath.tools;
 import java.lang.reflect.Method;
 
 import org.antlr.v4.runtime.Token;
+import org.tinylog.Logger;
 
 import parsevamath.tools.grammar.MathBaseVisitor;
 import parsevamath.tools.grammar.MathLexer;
@@ -131,8 +132,10 @@ public class MathAstBuilder extends MathBaseVisitor<ExpressionNode> {
             final Method method = Math.class.getMethod(methodName, double.class);
             methodNode.setFunction(method);
         }
-        catch (NoSuchMethodException e) {
-            e.printStackTrace();
+        catch (NoSuchMethodException noSuchMethodException) {
+            final String infoString = "Failed to get 'java.lang.Math' method '"
+                + methodName + "'";
+            Logger.info(infoString, noSuchMethodException);
         }
 
         return methodNode;

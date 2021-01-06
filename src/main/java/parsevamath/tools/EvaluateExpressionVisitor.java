@@ -31,6 +31,8 @@ package parsevamath.tools;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import org.tinylog.Logger;
+
 /**
  * This class handles the evaluation of all expressions by visiting each
  * node of the math AST and performing operations as it traverses the tree.
@@ -90,7 +92,7 @@ public class EvaluateExpressionVisitor extends AbstractMathAstVisitor<Double> {
     /**
      * {@inheritDoc}
      *
-     * <p>This implementation extracts a method from a parsevamath.tools.MethodNode and applies it
+     * <p>This implementation extracts a method from a MethodNode and applies it
      * to a specified argument, returning the result.
      */
     @Override
@@ -102,7 +104,11 @@ public class EvaluateExpressionVisitor extends AbstractMathAstVisitor<Double> {
                 (Double) mathMethod.invoke(mathMethod.getClass(), visit(node.getArgument()));
         }
         catch (IllegalAccessException | InvocationTargetException exception) {
-            exception.printStackTrace();
+            final String infoString = "Failed to invoke method '"
+                + mathMethod.getName()
+                + "' on arguement '"
+                + node.getArgument();
+            Logger.info(infoString, exception);
         }
         return returnVal;
     }
@@ -115,5 +121,27 @@ public class EvaluateExpressionVisitor extends AbstractMathAstVisitor<Double> {
     @Override
     Double visit(NumberNode node) {
         return node.getValue();
+    }
+
+    /**
+     * This method handles the double dispatch of the visit method for
+     * each concrete node type.
+     *
+     * @param node the expression node to process
+     * @return the result of calling visit on node
+     * @throws IllegalStateException on unknown token
+     */
+    @Override
+    public Double visit(ExpressionNode node) {
+        return switch (node.getClass().getSimpleName()) {
+            case "AdditionNode" -> visit((AdditionNode) node);
+            case "SubtractionNode" -> visit((SubtractionNode) node);
+            case "MultiplicationNode" -> visit((MultiplicationNode) node);
+            case "DivisionNode" -> visit((DivisionNode) node);
+            case "NegateNode" -> visit((NegateNode) node);
+            case "MethodNode" -> visit((MethodNode) node);
+            case "NumberNode" -> visit((NumberNode) node);
+            default -> throw new IllegalStateException("Unexpected value: " + node.getClass());
+        };
     }
 }
