@@ -6,7 +6,7 @@ api
 APPLET
 args
 arguement
-Arity
+arity
 Arquillian
 Arraycopy
 Aspectj
@@ -30,10 +30,12 @@ Cacheable
 Cdi
 Cfml
 charset
+checkerframework
 checkstyle
 Classloader
 Clickable
 Cloneable
+codehaus
 Compat
 Concat
 config
@@ -61,10 +63,13 @@ Emtpy
 enum
 eol
 equalsverifier
+errorprone
 Eslint
+evalution
 Exif
 expr
 Externalizable
+failureaccess
 Fallthrough
 Fallthru
 filepath
@@ -117,6 +122,7 @@ javac
 javadoc
 Javaee
 Javascript
+javassist
 javax
 Jax
 JB
@@ -139,7 +145,7 @@ Jpdl
 JProgress
 jqno
 JRadio
-JRE
+jre
 JScroll
 Jscs
 JSeparator
@@ -150,6 +156,7 @@ Json
 jsp
 JSpinner
 JSplit
+jsr
 JTabbed
 JTable
 JText
@@ -163,12 +170,13 @@ LBRACE
 Leanback
 lexer
 LHSOf
+listenablefuture
 LNOT
 matchxpath
 Mathmatical
 Mipmap
 Misordered
-Mixin
+mixin
 mockito
 MUL
 multiline
@@ -190,6 +198,7 @@ NONJAVA
 noscript
 NOTNULL
 NPath
+objc
 openjdk
 Osgi
 Overridable
@@ -199,6 +208,7 @@ Params
 parseva
 parsevamath
 pdf
+picocli
 Placeholders
 plugin
 pmd
