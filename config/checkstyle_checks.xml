@@ -574,7 +574,7 @@
                        Deque, Queue, LinkedList, Set, HashSet, SortedSet, TreeSet, Map,
                        HashMap, SortedMap, TreeMap, DetailsAST, CheckstyleException,
                        UnsupportedEncodingException, BuildException, ConversionException,
-                       FileNotFoundException, TestException"/>
+                       FileNotFoundException, TestException, MathParser, MathLexer"/>
     </module>
     <module name="ClassFanOutComplexity">
       <property name="max" value="25"/>
