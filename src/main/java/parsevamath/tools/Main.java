@@ -159,7 +159,7 @@ public final class Main {
             "-e",
             "--evaluate"
         },
-            description = "Evaluation mode. This option evaluates the given expression,"
+            description = "Evaluation mode. This option evaluates the requried expression,"
                 + " and returns the result.",
             defaultValue = "false")
         private boolean evaluationMode;
