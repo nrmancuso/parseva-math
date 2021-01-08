@@ -76,7 +76,8 @@ public final class Main {
                 runInteractive();
             }
             else if (cliOptions.evaluationMode) {
-                evaluate(cliOptions.expression);
+                final double value = evaluate(cliOptions.expression);
+                printOutput(value);
             }
         }
         catch (ParameterException parameterException) {
@@ -99,7 +100,8 @@ public final class Main {
             if (exprInput.isBlank()) {
                 break;
             }
-            evaluate(exprInput);
+            final double value = evaluate(exprInput);
+            printOutput(value);
         }
         scan.close();
     }
@@ -108,9 +110,9 @@ public final class Main {
      * This method handles the actual evaluation of the expression ast.
      *
      * @param exprInput the expression to evaluate
-     * @noinspection UseOfSystemOutOrSystemErr
+     * @return the value of the expression
      */
-    private static void evaluate(String exprInput) {
+    public static Double evaluate(String exprInput) {
         final CharStream codePointCharStream = CharStreams.fromString(exprInput);
         final MathLexer lexer = new MathLexer(codePointCharStream);
         final CommonTokenStream tokenStream = new CommonTokenStream(lexer);
@@ -119,11 +121,18 @@ public final class Main {
         final MathParser.CompilationUnitContext mathTree = parser.compilationUnit();
         final ExpressionNode ast = new MathAstBuilder().visitCompilationUnit(mathTree);
 
-        final Double value = new EvaluateExpressionVisitor().visit(ast);
+        return new EvaluateExpressionVisitor().visit(ast);
+    }
 
+    /**
+     * Handles printing of output.
+     *
+     * @param value the double to print
+     * @noinspection UseOfSystemOutOrSystemErr
+     */
+    private static void printOutput(Double value) {
         final String output = String.format("= %f\n", value);
-        System.out.print(output);
-        System.out.println();
+        System.out.println(output);
     }
 
     /**
