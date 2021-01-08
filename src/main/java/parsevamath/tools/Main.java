@@ -42,7 +42,6 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.ParameterException;
 import picocli.CommandLine.Parameters;
-import picocli.CommandLine.ParseResult;
 
 /**
  * Main driver class for parseva-math.
@@ -67,17 +66,15 @@ public final class Main {
         commandLine.setCaseInsensitiveEnumValuesAllowed(true);
 
         try {
-            final ParseResult parseResult = commandLine.parseArgs(args);
-
-            if (parseResult.isUsageHelpRequested()) {
-                commandLine.usage(System.out);
-            }
-            else if (cliOptions.interactiveMode) {
+            if (cliOptions.interactiveMode) {
                 runInteractive();
             }
             else if (cliOptions.evaluationMode) {
                 final double value = evaluate(cliOptions.expression);
                 printOutput(value);
+            }
+            else {
+                commandLine.usage(System.out);
             }
         }
         catch (ParameterException parameterException) {
