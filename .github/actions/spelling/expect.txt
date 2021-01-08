@@ -11,6 +11,7 @@ Arquillian
 Arraycopy
 Aspectj
 assertj
+atan
 Atclause
 Autoproxy
 Autowire
@@ -122,6 +123,7 @@ javac
 javadoc
 Javaee
 Javascript
+javase
 javassist
 javax
 Jax
@@ -189,6 +191,7 @@ NCSS
 Nfc
 nio
 Nls
+nmancus
 nobr
 NODESET
 noembed
@@ -248,6 +251,7 @@ spotbugs
 sql
 src
 SSL
+stackoverflow
 Standalone
 Stdlib
 streamapi
