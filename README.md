@@ -5,7 +5,7 @@
 
  <a href="https://github.com/badges/shields/graphs/contributors">
         <img src="https://img.shields.io/github/contributors/nmancus1/parseva-math" /></a>
-    <a href="https://github.com/badges/nmancus1/parseva-math">
+    <a href="https://github.com/nmancus1/parseva-math/commits/main">
         <img src="https://img.shields.io/github/commit-activity/m/nmancus1/parseva-math" /></a>
 
 
