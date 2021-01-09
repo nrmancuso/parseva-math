@@ -3,11 +3,12 @@
 <h4 align="center"> Compute mathematical expressions via abstract syntax tree. </h4><br>  
 <hr/>
 
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![Unlicense][license-shield]][license-url]
+ <a href="https://github.com/badges/shields/graphs/contributors">
+        <img src="https://img.shields.io/github/contributors/nmancus1/parseva-math" /></a>
+    <a href="https://github.com/badges/nmancus1/parseva-math">
+        <img src="https://img.shields.io/github/commit-activity/m/nmancus1/parseva-math" /></a>
+
+
 
 ## Introduction
 
@@ -133,28 +134,3 @@ Distributed under the [Unlicense](https://unlicense.org/).
 ## Acknowledgements
 * [Checkstyle](https://github.com/checkstyle/checkstyle)
 * [Lucas Trzesniewski](https://github.com/ltrzesniewski)
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-
-[contributors-shield]: https://img.shields.io/github/contributors/nmancus1/repo.svg?style=for-the-badge
-
-[contributors-url]: https://github.com/nmancus1/parseva-math/graphs/contributors
-
-[forks-shield]: https://img.shields.io/github/forks/nmancus1/repo.svg?style=for-the-badge
-
-[forks-url]: https://github.com/nmancus1/parseva-math/network/members
-
-[stars-shield]: https://img.shields.io/github/stars/nmancus1/repo.svg?style=for-the-badge
-
-[stars-url]: https://github.com/nmancus1/parseva-math/stargazers
-
-[issues-shield]: https://img.shields.io/github/issues/nmancus1/repo.svg?style=for-the-badge
-
-[issues-url]: https://github.com/nmancus1/parseva-math/issues
-
-[license-shield]: https://img.shields.io/github/license/nmancus1/repo.svg?style=for-the-badge
-
-[license-url]: https://github.com/nmancus1/parseva-math/blob/main/LICENSE.txt
-
-
