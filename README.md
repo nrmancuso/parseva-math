@@ -3,7 +3,7 @@
 <h4 align="center"> Compute mathematical expressions via abstract syntax tree. </h4><br>  
 <hr/>
 
- <a href="https://github.com/badges/shields/graphs/contributors">
+ <a href="https://github.com/nmancus1/parseva-math/graphs/contributors">
         <img src="https://img.shields.io/github/contributors/nmancus1/parseva-math" /></a>
     <a href="https://github.com/nmancus1/parseva-math/commits/main">
         <img src="https://img.shields.io/github/commit-activity/m/nmancus1/parseva-math" /></a>
