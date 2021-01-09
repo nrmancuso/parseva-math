@@ -23,6 +23,7 @@ Backticks
 basedir
 baz
 beanutils
+blog
 BNOT
 Bpmn
 BSR
@@ -31,6 +32,7 @@ Cacheable
 Cdi
 Cfml
 charset
+cheatsheet
 checkerframework
 checkstyle
 Classloader
@@ -108,6 +110,7 @@ HTMLJS
 http
 IGNORETHIS
 Ime
+img
 iml
 Immutables
 impl
@@ -174,6 +177,8 @@ lexer
 LHSOf
 listenablefuture
 LNOT
+ltrzesniewski
+markdownguide
 matchxpath
 Mathmatical
 Mipmap
@@ -230,6 +235,7 @@ RBRACE
 RBRACK
 reactivex
 Readonly
+rebased
 regex
 regexp
 Rethrown
@@ -237,6 +243,7 @@ Rgb
 Rtl
 rx
 Sameline
+scottlowe
 screenshots
 scrollbar
 Scss
@@ -257,6 +264,7 @@ Stdlib
 streamapi
 Styleable
 Subpackages
+svg
 Taglib
 throwable
 Thymeleaf
@@ -266,6 +274,7 @@ Tokenizer
 toolbar
 tooltip
 Touchscreen
+Trzesniewski
 ubuntu
 UElement
 UMD
