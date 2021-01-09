@@ -64,6 +64,7 @@ public final class Main {
         final CommandLine commandLine = new CommandLine(cliOptions);
         commandLine.setUsageHelpWidth(CliOptions.HELP_WIDTH);
         commandLine.setCaseInsensitiveEnumValuesAllowed(true);
+        commandLine.parseArgs(args);
 
         try {
             if (cliOptions.interactiveMode) {
