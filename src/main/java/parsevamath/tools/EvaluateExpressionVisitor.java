@@ -99,16 +99,18 @@ public class EvaluateExpressionVisitor extends AbstractMathAstVisitor<Double> {
     Double visit(MethodNode node) {
         final Method mathMethod = node.getFunction();
         Double returnVal = Double.NaN;
-        try {
-            returnVal =
-                (Double) mathMethod.invoke(mathMethod.getClass(), visit(node.getArgument()));
-        }
-        catch (IllegalAccessException | InvocationTargetException exception) {
-            final String infoString = "Failed to invoke method '"
-                + mathMethod.getName()
-                + "' on arguement '"
-                + node.getArgument();
-            Logger.info(infoString, exception);
+        if (mathMethod != null) {
+            try {
+                returnVal =
+                    (Double) mathMethod.invoke(mathMethod.getClass(), visit(node.getArgument()));
+            }
+            catch (IllegalAccessException | InvocationTargetException exception) {
+                final String infoString = "Failed to invoke method '"
+                    + mathMethod.getName()
+                    + "' on arguement '"
+                    + node.getArgument();
+                Logger.info(infoString, exception);
+            }
         }
         return returnVal;
     }
