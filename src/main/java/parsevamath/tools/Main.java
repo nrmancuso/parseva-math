@@ -53,7 +53,9 @@ public final class Main {
     }
 
     /**
-     * For now, this method runs only in "interactive" mode.
+     * Depending on the arguments supplied on command line,
+     * runs parseva-math in interactive or evaluation
+     * mode.
      *
      * @param args command line args
      * @noinspection UseOfSystemOutOrSystemErr
@@ -177,5 +179,4 @@ public final class Main {
         @Parameters(arity = "0..1", description = "Expression to evaluate")
         private String expression;
     }
-
 }
