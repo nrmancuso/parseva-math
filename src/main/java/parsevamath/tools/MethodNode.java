@@ -29,6 +29,9 @@
 package parsevamath.tools;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * This class represents a mathematical function node in the ast.
@@ -41,9 +44,13 @@ class MethodNode implements ExpressionNode {
     private Method function;
 
     /**
-     * The argument to supply to this function.
+     * The arguments to supply to this function.
      */
-    private ExpressionNode argument;
+    private final List<Double> arguments;
+
+    MethodNode() {
+        arguments = new ArrayList<>();
+    }
 
     /**
      * Get the function that this node uses.
@@ -64,20 +71,20 @@ class MethodNode implements ExpressionNode {
     }
 
     /**
-     * Gets the argument supplied to this node to evaluate.
+     * Gets the arguments supplied to this node to evaluate.
      *
-     * @return numerical expression
+     * @return list of numerical expressions
      */
-    public ExpressionNode getArgument() {
-        return argument;
+    public List<Double> getArguments() {
+        return Collections.unmodifiableList(arguments);
     }
 
     /**
-     * Sets the numerical argument for this node to evaluate.
+     * Sets the numerical arguments for this node to evaluate.
      *
-     * @param argument numerical expression
+     * @param arguments numerical expressions
      */
-    public void setArgument(ExpressionNode argument) {
-        this.argument = argument;
+    public void setArguments(List<Double> arguments) {
+        this.arguments.addAll(arguments);
     }
 }

@@ -102,13 +102,14 @@ public class EvaluateExpressionVisitor extends AbstractMathAstVisitor<Double> {
         if (mathMethod != null) {
             try {
                 returnVal =
-                    (Double) mathMethod.invoke(mathMethod.getClass(), visit(node.getArgument()));
+                    (Double) mathMethod.invoke(mathMethod.getClass(),
+                        node.getArguments().toArray());
             }
             catch (IllegalAccessException | InvocationTargetException exception) {
                 final String infoString = "Failed to invoke method '"
                     + mathMethod.getName()
                     + "' on arguement '"
-                    + node.getArgument();
+                    + node.getArguments();
                 Logger.info(infoString, exception);
             }
         }

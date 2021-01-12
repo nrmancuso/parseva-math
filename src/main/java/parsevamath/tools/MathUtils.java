@@ -37,4 +37,22 @@ public final class MathUtils {
         // Prevent instantiation of parsevamath.tools.MathUtils
     }
 
+    /**
+     * Extract the value from a numerical expression or negation node.
+     *
+     * @param node the ExpressionNode to extract value from
+     * @return value of numerical expression
+     */
+    public static Double extractValue(ExpressionNode node) {
+        final Double value;
+        if (node instanceof NegateNode negateNode) {
+            final NumberNode innerNode = (NumberNode) negateNode.getInnerNode();
+            value = innerNode.getValue();
+        }
+        else {
+            final NumberNode numberNode = (NumberNode) node;
+            value = numberNode.getValue();
+        }
+        return value;
+    }
 }

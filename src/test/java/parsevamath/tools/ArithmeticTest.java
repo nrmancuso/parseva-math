@@ -121,4 +121,13 @@ public class ArithmeticTest {
         final Double actual = Main.evaluate(expression);
         assertThat(expected).isEqualTo(actual);
     }
+
+    @Test
+    void testMultipleMethodArgs() {
+        final String expression = "pow(2.0,2.0)";
+        final Double expected = StrictMath.pow(2.0, 2.0);
+        final Double actual = Main.evaluate(expression);
+        assertThat(expected).isEqualTo(actual);
+    }
+
 }

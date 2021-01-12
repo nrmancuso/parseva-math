@@ -29,6 +29,9 @@
 package parsevamath.tools;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.antlr.v4.runtime.Token;
 import org.tinylog.Logger;
@@ -126,10 +129,24 @@ public class MathAstBuilder extends MathBaseVisitor<ExpressionNode> {
 
         // Node to return
         final MethodNode methodNode = new MethodNode();
-        methodNode.setArgument(visit(ctx.expr()));
+        final List<Double> arguments = new ArrayList<>();
+        final List<MathParser.ExprContext> exprContexts = ctx.expr();
+
+        exprContexts.forEach(exprContext -> {
+            arguments.add(MathUtils.extractValue(visit(exprContext)));
+        });
+
+        methodNode.setArguments(arguments);
 
         try {
-            final Method method = Math.class.getMethod(methodName, double.class);
+            // Here we fill array with double.class, since this is
+            // what all Math methods accept as parameters. The size
+            // of this array is the number of arguments to the function.
+            final Class<?>[] paramTypes = new Class[arguments.size()];
+            Arrays.fill(paramTypes, double.class);
+
+            // Use reflection to get Math method
+            final Method method = Math.class.getMethod(methodName, paramTypes);
             methodNode.setFunction(method);
         }
         catch (NoSuchMethodException noSuchMethodException) {
