@@ -60,6 +60,8 @@ DOCTYPE
 Dpi
 Drawables
 dtds
+EArithmetic
+EFunction
 Ejb
 Ellipsize
 Emtpy

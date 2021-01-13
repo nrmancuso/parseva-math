@@ -32,6 +32,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import org.antlr.v4.runtime.Token;
 import org.tinylog.Logger;
@@ -169,6 +170,25 @@ public class MathAstBuilder extends MathBaseVisitor<ExpressionNode> {
     @Override
     public ExpressionNode visitNumberExpr(MathParser.NumberExprContext ctx) {
         return new NumberNode(Double.parseDouble(ctx.value.getText()));
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>This implementation instantiates and initializes a new ConstantNode.
+     *
+     * @param ctx rule context
+     * @return new ConstantNode
+     */
+    @Override
+    public ExpressionNode visitConstExpr(MathParser.ConstExprContext ctx) {
+        final Double value = switch (ctx.getText().toUpperCase(Locale.ROOT)) {
+            case "E" -> Math.E;
+            case "PI" -> Math.PI;
+            default -> throw new IllegalStateException("Unexpected value: "
+                + ctx.getText().toUpperCase(Locale.ROOT));
+        };
+        return new ConstantNode(value);
     }
 
     /**

@@ -93,6 +93,14 @@ public abstract class AbstractMathAstVisitor<T> {
     abstract T visit(NumberNode node);
 
     /**
+     * Visit a constant node.
+     *
+     * @param node constant node to visit
+     * @return the result of calling visit on node
+     */
+    abstract T visit(ConstantNode node);
+
+    /**
      * This method handles the double dispatch of the visit method for
      * each concrete node type.
      *

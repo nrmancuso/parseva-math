@@ -575,6 +575,9 @@
                        HashMap, SortedMap, TreeMap, DetailsAST, CheckstyleException,
                        UnsupportedEncodingException, BuildException, ConversionException,
                        FileNotFoundException, TestException, MathParser, MathLexer"/>
+      <!-- parseva-math specific classes -->
+      <property name="excludedClasses" value="ExpressionNode, AdditionNode, ConstantNode,
+      DivisionNode, MethodNode, MultiplicationNode, NegateNode, NumberNode, SubtractionNode"/>
     </module>
     <module name="ClassFanOutComplexity">
       <property name="max" value="25"/>

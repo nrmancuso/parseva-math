@@ -127,6 +127,16 @@ public class EvaluateExpressionVisitor extends AbstractMathAstVisitor<Double> {
     }
 
     /**
+     * {@inheritDoc}
+     *
+     * <p>This implementation returns the value of this constant.
+     */
+    @Override
+    Double visit(ConstantNode node) {
+        return node.getValue();
+    }
+
+    /**
      * This method handles the double dispatch of the visit method for
      * each concrete node type.
      *
@@ -144,6 +154,7 @@ public class EvaluateExpressionVisitor extends AbstractMathAstVisitor<Double> {
             case "NegateNode" -> visit((NegateNode) node);
             case "MethodNode" -> visit((MethodNode) node);
             case "NumberNode" -> visit((NumberNode) node);
+            case "ConstantNode" -> visit((ConstantNode) node);
             default -> throw new IllegalStateException("Unexpected value: " + node.getClass());
         };
     }
