@@ -15,6 +15,12 @@ expr
     |   left=expr op=( OP_ADD | OP_SUB ) right=expr    # infixExpr
     |   func=ID '(' expr (COMMA expr)* ')'                 # funcExpr
     |   value=NUM                            # numberExpr
+    |   constant                            #constExpr
+    ;
+
+constant
+    :   ( 'e' | 'E' )
+    |   ( 'pi' | 'PI' )
     ;
 
 OP_ADD: '+';
