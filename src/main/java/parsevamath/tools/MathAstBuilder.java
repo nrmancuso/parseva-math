@@ -134,7 +134,7 @@ public class MathAstBuilder extends MathBaseVisitor<ExpressionNode> {
         final List<MathParser.ExprContext> exprContexts = ctx.expr();
 
         exprContexts.forEach(exprContext -> {
-            arguments.add(MathUtils.extractValue(visit(exprContext)));
+            arguments.add(ParsevaUtils.extractValue(visit(exprContext)));
         });
 
         methodNode.setArguments(arguments);

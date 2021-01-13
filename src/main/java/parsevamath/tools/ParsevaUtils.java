@@ -28,12 +28,18 @@
 
 package parsevamath.tools;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+import org.tinylog.Logger;
+
 /**
  * This is a utility class for parseva-math.
  */
-public final class MathUtils {
+public final class ParsevaUtils {
 
-    private MathUtils() {
+    private ParsevaUtils() {
         // Prevent instantiation of parsevamath.tools.MathUtils
     }
 
@@ -54,5 +60,33 @@ public final class MathUtils {
             value = numberNode.getValue();
         }
         return value;
+    }
+
+    /**
+     * Gets the version number from properties file.
+     *
+     * @return version number
+     */
+    public static String getParsevaVersion() {
+        String versionString;
+        final ClassLoader loader = Thread.currentThread().getContextClassLoader();
+        final InputStream stream = loader.getResourceAsStream("project.properties");
+        try {
+            final Properties properties = new Properties();
+            properties.load(stream);
+            versionString = properties.getProperty("version");
+        }
+        catch (IOException ignore) {
+            versionString = "Version information not available";
+        }
+
+        try {
+            stream.close();
+        }
+        catch (IOException exception) {
+            Logger.warn("Could not close input stream!", exception);
+        }
+
+        return versionString;
     }
 }
