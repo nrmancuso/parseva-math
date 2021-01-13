@@ -76,6 +76,9 @@ public final class Main {
                 final double value = evaluate(cliOptions.expression);
                 printOutput(value);
             }
+            else if (commandLine.isVersionHelpRequested()) {
+                System.out.println(ParsevaUtils.getParsevaVersion());
+            }
             else {
                 commandLine.usage(System.out);
             }
