@@ -92,7 +92,7 @@ an issue first. That way, other people can weigh in on the discussion before you
    <whatever you want to name this branch>`
 4. **Commit** changes to your *new* branch, with descriptive message
 5. **Push** your work back up to your fork `git push origin <your branch name>`
-6. **On Github** Submit a **Pull request** so that the group can review your changes
+6. **On Github** Submit a **Pull request** so that your changes can be reviewed
 
 NOTE: Be sure to merge the latest from "upstream" before making a pull request!
 All conflicts should be handled locally, then rebased and pushed to github.
