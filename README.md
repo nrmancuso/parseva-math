@@ -67,6 +67,7 @@ To evaluate one expression via command line, use `-e "<expression>"` or
  java -jar --enable-preview target/parseva-math-<version>-SNAPSHOT-jar-with-dependencies.jar -e "atan(0.5)"
  = 0.463648
 ```
+**parseva-math** also supports the constants `pi` and `e`.
 
 #### Help
 
