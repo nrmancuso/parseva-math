@@ -42,6 +42,7 @@ codehaus
 Compat
 Concat
 config
+COVEREDRATIO
 cron
 CSOFF
 CSON
@@ -124,6 +125,7 @@ instanceof
 Intelli
 intellij
 itemvalue
+jacoco
 javac
 javadoc
 Javaee

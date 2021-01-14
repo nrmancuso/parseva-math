@@ -92,6 +92,7 @@ an issue first. That way, other people can weigh in on the discussion before you
 4. **Make new branch** for YOUR code submission; do `git checkout -b 
    <whatever you want to name this branch>`
 4. **Commit** changes to your *new* branch, with descriptive message
+5. **Run** `mvn clean verify` ; make sure this passes before pushing your changes.
 5. **Push** your work back up to your fork `git push origin <your branch name>`
 6. **On Github** Submit a **Pull request** so that your changes can be reviewed
 
@@ -119,6 +120,13 @@ Before we get started, here are a few things we expect from you (and that you sh
 * If you open a pull request, please ensure that your contribution passes all tests. If there are test failures, you
   will need to address them before we can merge your contribution.
   
+## Phases
+
+To generate Jacoco report, do:
+`mvn clean verify`
+
+The report will be generated in `target/site/jacoco`.
+
 ## License
 Distributed under the [Unlicense](https://unlicense.org/). 
 
