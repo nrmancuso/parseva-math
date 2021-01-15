@@ -76,8 +76,7 @@ public abstract class AbstractMathAstVisitor<T> {
     abstract T visit(NegateNode node);
 
     /**
-     * This method extracts a method from a MethodNode and applies it
-     * to a specified argument.
+     * Visit a method node.
      *
      * @param node the Math function (method) to use in our evaluation.
      * @return the result of calling visit on node

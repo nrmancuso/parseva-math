@@ -79,6 +79,10 @@ public final class Main {
             else if (commandLine.isVersionHelpRequested()) {
                 System.out.println(ParsevaUtils.getParsevaVersion());
             }
+            else if (cliOptions.treeMode) {
+                MathAstNode root = buildMathAstNodeTree(cliOptions.expression);
+                //printTree(root);
+            }
             else {
                 commandLine.usage(System.out);
             }
@@ -125,6 +129,24 @@ public final class Main {
         final ExpressionNode ast = new MathAstBuilder().visitCompilationUnit(mathTree);
 
         return new EvaluateExpressionVisitor().visit(ast);
+    }
+
+    /**
+     * Builds the Math AST.
+     *
+     * @param exprInput the expression to evaluate and build AST for.
+     * @return MathNodeAst of expression
+     */
+    public static MathAstNode buildMathAstNodeTree(String exprInput) {
+        final CharStream codePointCharStream = CharStreams.fromString(exprInput);
+        final MathLexer lexer = new MathLexer(codePointCharStream);
+        final CommonTokenStream tokenStream = new CommonTokenStream(lexer);
+        final MathParser parser = new MathParser(tokenStream);
+
+        final MathParser.CompilationUnitContext mathTree = parser.compilationUnit();
+        final ExpressionNode ast = new MathAstBuilder().visitCompilationUnit(mathTree);
+
+        return new BuildMathNodeAstVisitor().visit(ast);
     }
 
     /**
@@ -175,6 +197,18 @@ public final class Main {
                 + " and returns the result.",
             defaultValue = "false")
         private boolean evaluationMode;
+
+        /**
+         * This boolean value determines if user wants to print expression AST.
+         */
+        @Option(names = {
+            "-t",
+            "--tree"
+        },
+            description = "Tree mode. This option builds an AST of the given expression,"
+                + " and prints the result.",
+            defaultValue = "false")
+        private boolean treeMode;
 
         /**
          * The actual expression we are evaluating.

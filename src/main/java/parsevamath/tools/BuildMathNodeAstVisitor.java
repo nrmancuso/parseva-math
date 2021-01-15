@@ -1,0 +1,206 @@
+/*
+ * Copyright (c) parseva-math  2021.
+ * This is free and unencumbered software released into the public domain.
+ *
+ * Anyone is free to copy, modify, publish, use, compile, sell, or
+ * distribute this software, either in source code form or as a compiled
+ * binary, for any purpose, commercial or non-commercial, and by any
+ * means.
+ *
+ * In jurisdictions that recognize copyright laws, the author or authors
+ * of this software dedicate any and all copyright interest in the
+ * software to the public domain. We make this dedication for the benefit
+ * of the public at large and to the detriment of our heirs and
+ * successors. We intend this dedication to be an overt act of
+ * relinquishment in perpetuity of all present and future rights to this
+ * software under copyright law.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+ * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * For more information, please refer to <http://unlicense.org/>
+ */
+
+package parsevamath.tools;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class BuildMathNodeAstVisitor extends AbstractMathAstVisitor<MathAstNode> {
+
+    /**
+     * Visit an addition node.
+     *
+     * @param node addition node
+     * @return the result of calling visit on node
+     */
+    @Override
+    MathAstNode visit(AdditionNode node) {
+        List<MathAstNode> children = new ArrayList<>();
+        children.add(visit(node.getLeft()));
+        children.add(visit(node.getRight()));
+
+        MathAstNode astNode = new MathAstNode();
+        astNode.setTokenType(MathTokenTypes.OP_ADD);
+        astNode.setChildren(children);
+
+        return astNode;
+    }
+
+    /**
+     * Visit a subtraction node.
+     *
+     * @param node subtraction node
+     * @return the result of calling visit on node
+     */
+    @Override
+    MathAstNode visit(SubtractionNode node) {
+        List<MathAstNode> children = new ArrayList<>();
+        children.add(visit(node.getLeft()));
+        children.add(visit(node.getRight()));
+
+        MathAstNode astNode = new MathAstNode();
+        astNode.setTokenType(MathTokenTypes.OP_SUB);
+        astNode.setChildren(children);
+
+        return astNode;
+    }
+
+    /**
+     * Visit a multiplication node.
+     *
+     * @param node multiplication node
+     * @return the result of calling visit on node
+     */
+    @Override
+    MathAstNode visit(MultiplicationNode node) {
+        List<MathAstNode> children = new ArrayList<>();
+        children.add(visit(node.getLeft()));
+        children.add(visit(node.getRight()));
+
+        MathAstNode astNode = new MathAstNode();
+        astNode.setTokenType(MathTokenTypes.OP_MUL);
+        astNode.setChildren(children);
+
+        return astNode;
+    }
+
+    /**
+     * Visit a division node.
+     *
+     * @param node division node
+     * @return the result of calling visit on node
+     */
+    @Override
+    MathAstNode visit(DivisionNode node) {
+        List<MathAstNode> children = new ArrayList<>();
+        children.add(visit(node.getLeft()));
+        children.add(visit(node.getRight()));
+
+        MathAstNode astNode = new MathAstNode();
+        astNode.setTokenType(MathTokenTypes.OP_DIV);
+        astNode.setChildren(children);
+
+        return astNode;        }
+
+    /**
+     * Visit a negation node.
+     *
+     * @param node negate node
+     * @return the result of calling visit on node
+     */
+    @Override
+    MathAstNode visit(NegateNode node) {
+        List<MathAstNode> children = new ArrayList<>();
+        children.add(visit(node.getInnerNode()));
+
+        MathAstNode astNode = new MathAstNode();
+        astNode.setTokenType(MathTokenTypes.NEGATE);
+        astNode.setChildren(children);
+
+        return astNode;
+    }
+
+    /**
+     * Visit a method node.
+     *
+     * @param node the Math function (method) to use in our evaluation.
+     * @return the result of calling visit on node
+     */
+    @Override
+    MathAstNode visit(MethodNode node) {
+        List<MathAstNode> children = new ArrayList<>();
+        List<Double> arguments = node.getArguments();
+
+        // Parse each arg and create a number node, adding to children.
+        arguments.forEach(arg -> {
+            MathAstNode newNode = new MathAstNode();
+            newNode.setText(String.valueOf(arg));
+            newNode.setTokenType(MathTokenTypes.NUM);
+            children.add(newNode);
+        });
+
+
+        MathAstNode astNode = new MathAstNode();
+        astNode.setTokenType(MathTokenTypes.FUNCTION);
+        astNode.setChildren(children);
+
+        return astNode;
+    }
+
+    /**
+     * Visit a number node.
+     *
+     * @param node number node to visit
+     * @return the result of calling visit on node
+     */
+    @Override
+    MathAstNode visit(NumberNode node) {
+        MathAstNode astNode = new MathAstNode();
+        astNode.setTokenType(MathTokenTypes.NUM);
+        astNode.setText(String.valueOf(node.getValue()));
+        return astNode;
+    }
+
+    /**
+     * Visit a constant node.
+     *
+     * @param node constant node to visit
+     * @return the result of calling visit on node
+     */
+    @Override
+    MathAstNode visit(ConstantNode node) {
+        MathAstNode astNode = new MathAstNode();
+        astNode.setTokenType(MathTokenTypes.NUM);
+        astNode.setText(String.valueOf(node.getValue()));
+        return astNode;
+    }
+
+    /**
+     * This method handles the double dispatch of the visit method for
+     * each concrete node type.
+     *
+     * @param node the expression node to process
+     * @return the result of calling visit on node
+     * @throws IllegalStateException on unknown token
+     */
+    @Override
+    public MathAstNode visit(ExpressionNode node) {
+        return switch (node.getClass().getSimpleName()) {
+            case "AdditionNode" -> visit((AdditionNode) node);
+            case "SubtractionNode" -> visit((SubtractionNode) node);
+            case "MultiplicationNode" -> visit((MultiplicationNode) node);
+            case "DivisionNode" -> visit((DivisionNode) node);
+            case "NegateNode" -> visit((NegateNode) node);
+            case "MethodNode" -> visit((MethodNode) node);
+            case "NumberNode" -> visit((NumberNode) node);
+            case "ConstantNode" -> visit((ConstantNode) node);
+            default -> throw new IllegalStateException("Unexpected value: " + node.getClass());
+        };
+    }
+}

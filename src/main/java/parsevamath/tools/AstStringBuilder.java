@@ -28,57 +28,17 @@
 
 package parsevamath.tools;
 
-/**
- * This class is used to decouple the token types from the generated ANTLR
- * code.
- */
-public final class MathTokenTypes {
+public final class AstStringBuilder {
 
-    /**
-     * This token is the addition operator.
-     */
-    public static final int OP_ADD = 3;
+    private AstStringBuilder() {
+    }
 
-    /**
-     * This token is the subtraction operator.
-     */
-    public static final int OP_SUB = 4;
+    public static void buildTreeString(MathAstNode root) {
+        final StringBuilder stringBuilder = new StringBuilder(1024);
+        MathAstNode node = root;
+        while (node != null) {
+            stringBuilder.append()
+        }
 
-    /**
-     * This token is the multiplication operator.
-     */
-    public static final int OP_MUL = 5;
-
-    /**
-     * This token is the division operator.
-     */
-    public static final int OP_DIV = 6;
-
-    /**
-     * This token is a numerical expression.
-     */
-    public static final int NUM = 7;
-
-    /**
-     * This token is an identifier.
-     */
-    public static final int ID = 8;
-
-    /**
-     * This token is for whitespace.
-     */
-    public static final int WS = 9;
-
-    /**
-     * This is the negation node token.
-     */
-    public static final int NEGATE = 10;
-
-    /**
-     * This is the method (function) node token.
-     */
-    public static final int FUNCTION = 11;
-
-    private MathTokenTypes() {
     }
 }
