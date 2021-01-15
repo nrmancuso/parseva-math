@@ -1,0 +1,7 @@
+task:
+  name: Cirrus CI
+  container:
+    image: maven:latest
+  maven_cache:
+    folder: ~/.m2
+  test_script:  mvn clean verify
