@@ -4,4 +4,7 @@ task:
     image: maven:latest
   maven_cache:
     folder: ~/.m2
-  test_script:  mvn clean verify
+  test_script:
+    - mvn clean verify
+    - ./.ci/verify-approved.sh
+
