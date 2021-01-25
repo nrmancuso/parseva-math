@@ -92,6 +92,17 @@ public class EvaluateExpressionVisitor extends AbstractMathAstVisitor<Double> {
     /**
      * {@inheritDoc}
      *
+     * <p>This implementation returns the factorial of the inner node.
+     */
+    @Override
+    Double visit(FactorialNode node) {
+        final ExpressionNode innerNode = node.getInnerNode();
+        return MathUtils.getFactorial(visit(innerNode));
+    }
+
+    /**
+     * {@inheritDoc}
+     *
      * <p>This implementation extracts a method from a MethodNode and applies it
      * to a specified argument, returning the result.
      */
@@ -155,6 +166,7 @@ public class EvaluateExpressionVisitor extends AbstractMathAstVisitor<Double> {
             case "MethodNode" -> visit((MethodNode) node);
             case "NumberNode" -> visit((NumberNode) node);
             case "ConstantNode" -> visit((ConstantNode) node);
+            case "FactorialNode" -> visit((FactorialNode) node);
             default -> throw new IllegalStateException("Unexpected value: " + node.getClass());
         };
     }

@@ -85,7 +85,7 @@ public class ArithmeticTest {
     @Test
     void testCompoundExpression() {
         final String expression = "sqrt(7) + (2*3*6) + sin(32)";
-        final Double expected = 2.6457513110645907 + 2*3*6 + StrictMath.sin(32.0);
+        final Double expected = 2.6457513110645907 + 2 * 3 * 6 + StrictMath.sin(32.0);
         final Double actual = Main.evaluate(expression);
         assertThat(expected).isEqualTo(actual);
     }
@@ -126,6 +126,14 @@ public class ArithmeticTest {
     void testMultipleMethodArgs() {
         final String expression = "pow(2.0,2.0)";
         final Double expected = StrictMath.pow(2.0, 2.0);
+        final Double actual = Main.evaluate(expression);
+        assertThat(expected).isEqualTo(actual);
+    }
+
+    @Test
+    void testFactorial() {
+        final String expression = "13!";
+        final Double expected = MathUtils.getFactorial(13.0);
         final Double actual = Main.evaluate(expression);
         assertThat(expected).isEqualTo(actual);
     }

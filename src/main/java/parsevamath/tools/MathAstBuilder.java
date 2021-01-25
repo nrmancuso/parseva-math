@@ -204,4 +204,16 @@ public class MathAstBuilder extends MathBaseVisitor<ExpressionNode> {
     public ExpressionNode visitParensExpr(MathParser.ParensExprContext ctx) {
         return visit(ctx.expr());
     }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>This implementation allows for evaluation of factorials.
+     */
+    @Override
+    public ExpressionNode visitFactorialExpr(MathParser.FactorialExprContext ctx) {
+        final FactorialNode node = new FactorialNode();
+        node.setInnerNode(visit(ctx.expr()));
+        return node;
+    }
 }
