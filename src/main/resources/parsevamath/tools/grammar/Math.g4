@@ -16,6 +16,7 @@ expr
     |   func=ID '(' expr (COMMA expr)* ')'                 # funcExpr
     |   value=NUM                            # numberExpr
     |   constant                            #constExpr
+    |   expr OP_FACT                        #factorialExpr
     ;
 
 constant
@@ -27,6 +28,7 @@ OP_ADD: '+';
 OP_SUB: '-';
 OP_MUL: '*';
 OP_DIV: '/';
+OP_FACT: '!';
 
 NUM :   [0-9]+ ('.' [0-9]+)? ([eE] [+-]? [0-9]+)?;
 ID  :   [a-zA-Z]+;

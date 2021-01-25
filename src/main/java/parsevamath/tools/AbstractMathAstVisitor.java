@@ -109,4 +109,12 @@ public abstract class AbstractMathAstVisitor<T> {
      * @noinspection OverloadedMethodsWithSameNumberOfParameters
      */
     abstract T visit(ExpressionNode node);
+
+    /**
+     * Visit a factorial node.
+     *
+     * @param node factorial node to visit
+     * @return the result of calling visit on node
+     */
+    abstract T visit(FactorialNode node);
 }
