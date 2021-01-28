@@ -32,43 +32,73 @@ package parsevamath.tools;
  * This class is used to decouple the token types from the generated ANTLR
  * code.
  */
-public final class MathTokenTypes {
+public final class TokenTypes {
 
     /**
      * This token is the addition operator.
      */
-    public static final int OP_ADD = 3;
+    public static final int OP_ADD = 0;
 
     /**
      * This token is the subtraction operator.
      */
-    public static final int OP_SUB = 4;
+    public static final int OP_SUB = 1;
 
     /**
      * This token is the multiplication operator.
      */
-    public static final int OP_MUL = 5;
+    public static final int OP_MUL = 2;
 
     /**
      * This token is the division operator.
      */
-    public static final int OP_DIV = 6;
+    public static final int OP_DIV = 3;
 
     /**
      * This token is a numerical expression.
      */
-    public static final int NUM = 7;
+    public static final int NUM = 4;
 
     /**
      * This token is an identifier.
      */
-    public static final int ID = 8;
+    public static final int ID = 5;
 
     /**
      * This token is for whitespace.
      */
-    public static final int WS = 9;
+    public static final int WS = 6;
 
-    private MathTokenTypes() {
+    /**
+     * This is the negation node token.
+     */
+    public static final int NEGATE = 7;
+
+    /**
+     * This is the method (function) node token.
+     */
+    public static final int FUNCTION = 8;
+
+    /**
+     * This is the constant node token.
+     */
+    public static final int CONSTANT = 9;
+
+    /**
+     * This is the factorial node token.
+     */
+    public static final int FACTORIAL = 10;
+
+    /**
+     * This is the factorial node token.
+     */
+    public static final int LPAREN = 11;
+
+    /**
+     * This is the factorial node token.
+     */
+    public static final int RPAREN = 12;
+
+    private TokenTypes() {
     }
 }

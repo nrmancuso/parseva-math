@@ -30,6 +30,8 @@ package parsevamath.tools;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import org.tinylog.Logger;
@@ -39,8 +41,15 @@ import org.tinylog.Logger;
  */
 public final class ParsevaUtils {
 
+    /**
+     * Capacity for stringbuilders.
+     */
+    public static final int CAPACITY = 1024;
+
+    /**
+     * Prevent instantiation.
+     */
     private ParsevaUtils() {
-        // Prevent instantiation of parsevamath.tools.MathUtils
     }
 
     /**
@@ -89,4 +98,67 @@ public final class ParsevaUtils {
 
         return versionString;
     }
+
+    /**
+     * Builds a string representation of the ast.
+     *
+     * @param astNode the ast node to build string of
+     * @return string representation of ast
+     */
+    public static String toStringTree(MathAstNode astNode) {
+        MathAstNode ast = astNode;
+        final List<MathAstNode> firstStack = new ArrayList<>();
+        firstStack.add(ast);
+
+        final List<List<MathAstNode>> childListStack = new ArrayList<>();
+        childListStack.add(firstStack);
+
+        final StringBuilder builder = new StringBuilder(CAPACITY);
+        while (!childListStack.isEmpty()) {
+
+            final List<MathAstNode> childStack = childListStack.get(childListStack.size() - 1);
+
+            if (childStack.isEmpty()) {
+                childListStack.remove(childListStack.size() - 1);
+            }
+            else {
+                ast = childStack.remove(0);
+
+                final String caption = String.format("%s -> %s",
+                    TokenUtil.getTokenName(ast.getTokenType()), ast.getText());
+
+                final StringBuilder indent = new StringBuilder(CAPACITY);
+
+                for (int i = 0; i < childListStack.size() - 1; i++) {
+                    if (childListStack.get(i).isEmpty()) {
+                        indent.append("   ");
+                    }
+                    else {
+                        indent.append("|  ");
+                    }
+                }
+
+                if (childStack.isEmpty()) {
+                    builder.append(indent)
+                        .append("'- ")
+                        .append(caption)
+                        .append(System.lineSeparator());
+                }
+                else {
+                    builder.append(indent)
+                        .append("|- ")
+                        .append(caption)
+                        .append(System.lineSeparator());
+                }
+
+                if (ast.getChildren().isEmpty()) {
+                    continue;
+                }
+                final List<MathAstNode> toStringChildren = new ArrayList<>(ast.getChildren());
+                childListStack.add(toStringChildren);
+            }
+        }
+        return builder.toString();
+    }
+
 }

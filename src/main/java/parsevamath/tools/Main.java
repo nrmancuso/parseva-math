@@ -79,6 +79,10 @@ public final class Main {
             else if (commandLine.isVersionHelpRequested()) {
                 System.out.println(ParsevaUtils.getParsevaVersion());
             }
+            else if (cliOptions.treeMode) {
+                final MathAstNode root = buildMathAstNodeTree(cliOptions.expression);
+                System.out.println(ParsevaUtils.toStringTree(root));
+            }
             else {
                 commandLine.usage(System.out);
             }
@@ -128,6 +132,21 @@ public final class Main {
     }
 
     /**
+     * Builds the Math AST.
+     *
+     * @param exprInput the expression to evaluate and build AST for.
+     * @return MathNodeAst of expression
+     */
+    public static MathAstNode buildMathAstNodeTree(String exprInput) {
+        final CharStream codePointCharStream = CharStreams.fromString(exprInput);
+        final MathLexer lexer = new MathLexer(codePointCharStream);
+        final CommonTokenStream tokenStream = new CommonTokenStream(lexer);
+        final MathParser parser = new MathParser(tokenStream);
+        final MathParser.CompilationUnitContext compilationUnit = parser.compilationUnit();
+        return new HomogeneousAstVisitor().visit(compilationUnit);
+    }
+
+    /**
      * Handles printing of output.
      *
      * @param value the double to print
@@ -172,9 +191,21 @@ public final class Main {
             "--evaluate"
         },
             description = "Evaluation mode. This option evaluates the given expression,"
-                + " and returns the result.",
+                + " and returns the result. Example: '-e \" 2 + 2\"'",
             defaultValue = "false")
         private boolean evaluationMode;
+
+        /**
+         * This boolean value determines if user wants to print expression AST.
+         */
+        @Option(names = {
+            "-t",
+            "--tree"
+        },
+            description = "Tree mode. This option builds an AST of the given expression,"
+                + " and prints the result. Example: '-t \"2 + 2\"'",
+            defaultValue = "false")
+        private boolean treeMode;
 
         /**
          * The actual expression we are evaluating.
