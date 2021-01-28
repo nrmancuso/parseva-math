@@ -147,27 +147,4 @@ public class EvaluateExpressionVisitor extends AbstractMathAstVisitor<Double> {
         return node.getValue();
     }
 
-    /**
-     * This method handles the double dispatch of the visit method for
-     * each concrete node type.
-     *
-     * @param node the expression node to process
-     * @return the result of calling visit on node
-     * @throws IllegalStateException on unknown token
-     */
-    @Override
-    public Double visit(ExpressionNode node) {
-        return switch (node.getClass().getSimpleName()) {
-            case "AdditionNode" -> visit((AdditionNode) node);
-            case "SubtractionNode" -> visit((SubtractionNode) node);
-            case "MultiplicationNode" -> visit((MultiplicationNode) node);
-            case "DivisionNode" -> visit((DivisionNode) node);
-            case "NegateNode" -> visit((NegateNode) node);
-            case "MethodNode" -> visit((MethodNode) node);
-            case "NumberNode" -> visit((NumberNode) node);
-            case "ConstantNode" -> visit((ConstantNode) node);
-            case "FactorialNode" -> visit((FactorialNode) node);
-            default -> throw new IllegalStateException("Unexpected value: " + node.getClass());
-        };
-    }
 }

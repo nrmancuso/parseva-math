@@ -44,7 +44,8 @@ import parsevamath.tools.grammar.MathParser;
 /**
  * This class builds an ast for parseva-math grammar using the visitor pattern.
  */
-public class MathAstBuilder extends MathBaseVisitor<ExpressionNode> {
+public class MathAstBuilder
+    extends MathBaseVisitor<ExpressionNode> implements MathAstBuilderInterface {
 
     /**
      * This string is used when throwing IllegalStateException on an

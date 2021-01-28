@@ -9,14 +9,14 @@ compilationUnit
     ;
 
 expr
-    :   '(' expr ')'                         # parensExpr
+    :   lparen=LPAREN expr rparen=RPAREN                         # parensExpr
     |   op=( OP_ADD | OP_SUB ) expr                    # unaryExpr
     |   left=expr op=( OP_MUL | OP_DIV ) right=expr    # infixExpr
     |   left=expr op=( OP_ADD | OP_SUB ) right=expr    # infixExpr
     |   func=ID '(' expr (COMMA expr)* ')'                 # funcExpr
     |   value=NUM                            # numberExpr
     |   constant                            #constExpr
-    |   expr OP_FACT                        #factorialExpr
+    |   expr fact=OP_FACT                        #factorialExpr
     ;
 
 constant
@@ -29,6 +29,8 @@ OP_SUB: '-';
 OP_MUL: '*';
 OP_DIV: '/';
 OP_FACT: '!';
+LPAREN: '(';
+RPAREN: ')';
 
 NUM :   [0-9]+ ('.' [0-9]+)? ([eE] [+-]? [0-9]+)?;
 ID  :   [a-zA-Z]+;

@@ -33,6 +33,9 @@ package parsevamath.tools;
  */
 public final class MathUtils {
 
+    /**
+     * Prevent instantiation.
+     */
     private MathUtils() {
     }
 
