@@ -4,6 +4,10 @@ grammar Math;
  package parsevamath.tools.grammar;
 }
 
+tokens{
+    NEGATE, FUNCTION, CONSTANT
+}
+
 compilationUnit
     :   expr EOF
     ;
