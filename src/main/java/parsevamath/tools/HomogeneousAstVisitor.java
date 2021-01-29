@@ -184,7 +184,7 @@ public class HomogeneousAstVisitor
     public MathAstNode visitFactorialExpr(MathParser.FactorialExprContext ctx) {
         final MathAstNode astNode = new MathAstNode();
         astNode.setText(ctx.fact.getText());
-        astNode.setTokenType(TokenTypes.FACTORIAL);
+        astNode.setTokenType(TokenTypes.OP_FACT);
         astNode.addChild(visit(ctx.expr()));
         return astNode;
     }
