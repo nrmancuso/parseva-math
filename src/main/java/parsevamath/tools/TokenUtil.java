@@ -28,6 +28,10 @@
 
 package parsevamath.tools;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * This utility class handles token-related tasks.
  */
@@ -36,18 +40,26 @@ public final class TokenUtil {
     /**
      * Maps from a token value to name.
      */
-    private static final String[] TOKEN_VALUE_TO_NAME;
+    private static final Map<Integer, String> TOKEN_VALUE_TO_NAME;
 
     static {
 
-        // These tokens MUST be in the same order as the declared fields of
-        // TokenTypes.
-        TOKEN_VALUE_TO_NAME = new String[] {
-            "OP_ADD", "OP_SUB", "OP_MUL", "OP_DIV",
-            "NUM", "ID", "WS", "NEGATE", "FUNCTION",
-            "CONSTANT", "FACTORIAL", "LPAREN",
-            "RPAREN",
-        };
+        // All TokenTypes must be included here.
+        TOKEN_VALUE_TO_NAME = new HashMap<>();
+        TOKEN_VALUE_TO_NAME.put(TokenTypes.OP_ADD, "OP_ADD");
+        TOKEN_VALUE_TO_NAME.put(TokenTypes.OP_SUB, "OP_SUB");
+        TOKEN_VALUE_TO_NAME.put(TokenTypes.OP_MUL, "OP_MUL");
+        TOKEN_VALUE_TO_NAME.put(TokenTypes.OP_DIV, "OP_DIV");
+        TOKEN_VALUE_TO_NAME.put(TokenTypes.NUM, "NUM");
+        TOKEN_VALUE_TO_NAME.put(TokenTypes.ID, "ID");
+        TOKEN_VALUE_TO_NAME.put(TokenTypes.WS, "WS");
+        TOKEN_VALUE_TO_NAME.put(TokenTypes.NEGATE, "NEGATE");
+        TOKEN_VALUE_TO_NAME.put(TokenTypes.FUNCTION, "FUNCTION");
+        TOKEN_VALUE_TO_NAME.put(TokenTypes.CONSTANT, "CONSTANT");
+        TOKEN_VALUE_TO_NAME.put(TokenTypes.OP_FACT, "OP_FACT");
+        TOKEN_VALUE_TO_NAME.put(TokenTypes.LPAREN, "LPAREN");
+        TOKEN_VALUE_TO_NAME.put(TokenTypes.RPAREN, "RPAREN");
+        TOKEN_VALUE_TO_NAME.put(TokenTypes.COMMA, "COMMA");
     }
 
     /**
@@ -64,11 +76,7 @@ public final class TokenUtil {
      * @throws IllegalArgumentException when id is not valid
      */
     public static String getTokenName(int id) {
-        if (id > TOKEN_VALUE_TO_NAME.length - 1) {
-            throw new IllegalArgumentException(
-                "Token value is greater than number of tokens!");
-        }
-        final String name = TOKEN_VALUE_TO_NAME[id];
+        final String name = TOKEN_VALUE_TO_NAME.get(id);
         if (name == null) {
             throw new IllegalArgumentException("Token name is not assigned!");
         }
@@ -76,13 +84,38 @@ public final class TokenUtil {
     }
 
     /**
+     * Gets the numerical value (token ID) of a given token name.
+     *
+     * @param name the token name to look up
+     * @return token ID
+     */
+    public static Integer getTokenID(String name) {
+        final Map.Entry<Integer, String> tokenEntry =
+            TOKEN_VALUE_TO_NAME.entrySet()
+            .stream()
+            .filter(entry -> name.equals(entry.getValue()))
+            .findFirst().orElse(null);
+
+        final Integer tokenID;
+        if (tokenEntry != null) {
+            tokenID = tokenEntry.getKey();
+        }
+        else {
+            throw new IllegalArgumentException("Token name does not exist "
+                + "in 'TOKEN_VALUE_TO_NAME'");
+        }
+
+        return tokenID;
+    }
+
+    /**
      * Gets the number of named tokens in
-     * 'TOKEN_VALUE_TO_NAME' array.
+     * 'TOKEN_VALUE_TO_NAME' map.
      *
      * @return number of token names
      */
     public static int getNumberOfTokenNames() {
-        return TOKEN_VALUE_TO_NAME.length;
+        return TOKEN_VALUE_TO_NAME.size();
     }
 
     /**
@@ -90,7 +123,7 @@ public final class TokenUtil {
      *
      * @return all token names
      */
-    public static String[] getAllTokenNames() {
-        return TOKEN_VALUE_TO_NAME;
+    public static Collection<String> getAllTokenNames() {
+        return TOKEN_VALUE_TO_NAME.values();
     }
 }

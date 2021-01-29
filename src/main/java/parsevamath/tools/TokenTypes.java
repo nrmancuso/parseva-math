@@ -28,6 +28,8 @@
 
 package parsevamath.tools;
 
+import parsevamath.tools.grammar.MathParser;
+
 /**
  * This class is used to decouple the token types from the generated ANTLR
  * code.
@@ -37,67 +39,72 @@ public final class TokenTypes {
     /**
      * This token is the addition operator.
      */
-    public static final int OP_ADD = 0;
+    public static final int OP_ADD = MathParser.OP_ADD;
 
     /**
      * This token is the subtraction operator.
      */
-    public static final int OP_SUB = 1;
+    public static final int OP_SUB = MathParser.OP_SUB;
 
     /**
      * This token is the multiplication operator.
      */
-    public static final int OP_MUL = 2;
+    public static final int OP_MUL = MathParser.OP_MUL;
 
     /**
      * This token is the division operator.
      */
-    public static final int OP_DIV = 3;
+    public static final int OP_DIV = MathParser.OP_DIV;
 
     /**
      * This token is a numerical expression.
      */
-    public static final int NUM = 4;
+    public static final int NUM = MathParser.NUM;
 
     /**
      * This token is an identifier.
      */
-    public static final int ID = 5;
+    public static final int ID = MathParser.ID;
 
     /**
      * This token is for whitespace.
      */
-    public static final int WS = 6;
+    public static final int WS = MathParser.WS;
 
     /**
      * This is the negation node token.
      */
-    public static final int NEGATE = 7;
+    public static final int NEGATE = MathParser.NEGATE;
 
     /**
      * This is the method (function) node token.
      */
-    public static final int FUNCTION = 8;
+    public static final int FUNCTION = MathParser.FUNCTION;
 
     /**
      * This is the constant node token.
      */
-    public static final int CONSTANT = 9;
+    public static final int CONSTANT = MathParser.CONSTANT;
 
     /**
      * This is the factorial node token.
      */
-    public static final int FACTORIAL = 10;
+    public static final int OP_FACT = MathParser.OP_FACT;
 
     /**
      * This is the factorial node token.
      */
-    public static final int LPAREN = 11;
+    public static final int LPAREN = MathParser.LPAREN;
 
     /**
      * This is the factorial node token.
      */
-    public static final int RPAREN = 12;
+    public static final int RPAREN = MathParser.RPAREN;
+
+    /**
+     * This is the comma node token.
+     */
+    public static final int COMMA = MathParser.COMMA;
 
     private TokenTypes() {
     }
