@@ -80,7 +80,7 @@ public class HomogeneousAstTest {
     void testFactorialExpressionAst() {
         final String expression = "5!";
         final String expected = """
-            '- FACTORIAL -> !
+            '- OP_FACT -> !
                '- NUM -> 5
             """;
         final String actual =
@@ -116,7 +116,7 @@ public class HomogeneousAstTest {
     void testParenFactorial() {
         final String expression = "(5 + 1)!";
         final String expected = """
-            '- FACTORIAL -> !
+            '- OP_FACT -> !
                '- LPAREN -> (
                   |- OP_ADD -> +
                   |  |- NUM -> 5
