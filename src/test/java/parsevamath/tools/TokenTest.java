@@ -31,10 +31,16 @@ package parsevamath.tools;
 import static com.google.common.truth.Truth.assertWithMessage;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.antlr.v4.runtime.Vocabulary;
 import org.junit.jupiter.api.Test;
+
+import parsevamath.tools.grammar.MathParser;
 
 public class TokenTest {
 
@@ -57,10 +63,11 @@ public class TokenTest {
     void testTokenNamesOrder() {
         final Field[] mathTokenTypesFields = TokenTypes.class.getDeclaredFields();
         Stream<Field> stream = Arrays.stream(mathTokenTypesFields);
-        final String[] mathTokenTypesNames = stream
-            .map(Field::getName)
-            .toArray(String[]::new);
-        final String [] mathTokenUtilNames = TokenUtil.getAllTokenNames();
+        final List<String> mathTokenTypesNames =
+            stream.map(Field::getName)
+                .collect(Collectors.toList());
+        final List<String> tokenUtilTokenNames =
+            new ArrayList<>(TokenUtil.getAllTokenNames());
         final String message = """
             Names of token types in MathTokenTypes.java and 
             token names in MathTokenUtil.java are not in the same
@@ -69,6 +76,38 @@ public class TokenTest {
 
         assertWithMessage(message)
             .that(mathTokenTypesNames)
-            .isEqualTo(mathTokenUtilNames);
+            .containsExactlyElementsIn(tokenUtilTokenNames);
     }
+
+    @Test
+    void testAllTokensFromParserAreInTokenTypes() {
+        final Vocabulary parserTokenTypes = MathParser.VOCABULARY;
+        final List<String> tokenUtilTokenNames =
+            new ArrayList<>(TokenUtil.getAllTokenNames());
+
+        // Start at 5, since first five tokens are null
+        for (int i = 5; i < parserTokenTypes.getMaxTokenType(); i++) {
+            final String symbolicName = parserTokenTypes.getSymbolicName(i);
+            final String message = "'TOKEN_VALUE_TO_NAME' does not contain "
+                + parserTokenTypes.getSymbolicName(i);
+            assertWithMessage(message)
+                .that(tokenUtilTokenNames.contains(symbolicName))
+                .isTrue();
+        }
+    }
+
+    @Test
+    void testAllTokensFromTokenTypesAreInParser() {
+        final Vocabulary parserTokenTypes = MathParser.VOCABULARY;
+        final List<String> tokenUtilTokenNames =
+            new ArrayList<>(TokenUtil.getAllTokenNames());
+
+        tokenUtilTokenNames.forEach(name -> {
+            final int tokenType = TokenUtil.getTokenID(name);
+            assertWithMessage("")
+                .that(parserTokenTypes.getSymbolicName(tokenType))
+                .isNotNull();
+        });
+    }
+
 }
