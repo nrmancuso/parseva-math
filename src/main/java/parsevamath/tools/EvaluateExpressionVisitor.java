@@ -30,6 +30,9 @@ package parsevamath.tools;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.tinylog.Logger;
 
@@ -108,17 +111,40 @@ public class EvaluateExpressionVisitor extends AbstractMathAstVisitor<Double> {
      */
     @Override
     Double visit(MethodNode node) {
-        final Method mathMethod = node.getFunction();
+        final List<Double> argumentValues = new ArrayList<>();
+        node.getArguments().forEach(arg -> {
+            argumentValues.add(visit(arg));
+        });
+
+        Method method = null;
+
+        try {
+            // Here we fill array with double.class, since this is
+            // what all Math methods accept as parameters. The size
+            // of this array is the number of arguments to the function.
+            final Class<?>[] paramTypes =
+                new Class[argumentValues.size()];
+            Arrays.fill(paramTypes, double.class);
+
+            // Use reflection to get Math method
+            method = Math.class.getMethod(node.getFunctionName(), paramTypes);
+        }
+        catch (NoSuchMethodException noSuchMethodException) {
+            final String infoString = "Failed to get 'java.lang.Math' method '"
+                + node.getFunctionName() + "'";
+            Logger.info(infoString, noSuchMethodException);
+        }
+
         Double returnVal = Double.NaN;
-        if (mathMethod != null) {
+        if (method != null) {
             try {
                 returnVal =
-                    (Double) mathMethod.invoke(mathMethod.getClass(),
-                        node.getArguments().toArray());
+                    (Double) method.invoke(method.getClass(),
+                        argumentValues.toArray());
             }
             catch (IllegalAccessException | InvocationTargetException exception) {
                 final String infoString = "Failed to invoke method '"
-                    + mathMethod.getName()
+                    + method.getName()
                     + "' on arguement '"
                     + node.getArguments();
                 Logger.info(infoString, exception);

@@ -28,7 +28,6 @@
 
 package parsevamath.tools;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -39,35 +38,38 @@ import java.util.List;
 class MethodNode implements ExpressionNode {
 
     /**
-     * Mathmatical function that this node represents.
-     */
-    private Method function;
-
-    /**
      * The arguments to supply to this function.
      */
-    private final List<Double> arguments;
+    private final List<ExpressionNode> arguments;
 
+    /**
+     * Unchecked name of mathematical function.
+     */
+    private String functionName;
+
+    /**
+     * Default constructor.
+     */
     MethodNode() {
         arguments = new ArrayList<>();
     }
 
     /**
-     * Get the function that this node uses.
+     * Gets the given function name.
      *
-     * @return method from java.lang.Math
+     * @return name of function
      */
-    public Method getFunction() {
-        return function;
+    public String getFunctionName() {
+        return functionName;
     }
 
     /**
-     * Sets the function that this node uses.
+     * Sets the function name for this node.
      *
-     * @param function the method from java.lang.Math to set
+     * @param functionName name to set
      */
-    public void setFunction(Method function) {
-        this.function = function;
+    public void setFunctionName(String functionName) {
+        this.functionName = functionName;
     }
 
     /**
@@ -75,7 +77,7 @@ class MethodNode implements ExpressionNode {
      *
      * @return list of numerical expressions
      */
-    public List<Double> getArguments() {
+    public List<ExpressionNode> getArguments() {
         return Collections.unmodifiableList(arguments);
     }
 
@@ -84,7 +86,18 @@ class MethodNode implements ExpressionNode {
      *
      * @param arguments numerical expressions
      */
-    public void setArguments(List<Double> arguments) {
+    public void setArguments(List<ExpressionNode> arguments) {
         this.arguments.addAll(arguments);
     }
+
+    /**
+     * Add argument (ExpressionNode) to list of arguments.
+     *
+     * @param node ExpressioNode to add
+     */
+    public void addArgument(ExpressionNode node) {
+        arguments.add(node);
+
+    }
+
 }

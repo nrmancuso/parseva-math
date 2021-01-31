@@ -53,8 +53,8 @@ This will drop you into the parseva-math terminal, where you can evaluate expres
 > sin(1)
 = 0.841471
 
-> sqrt(4)
-= 2.000000
+> sqrt(sin(0) + 20 + sqrt(50 - pow(5, 2)))
+= 5.000000
 ```
 
 To exit, simply press enter at an empty prompt.

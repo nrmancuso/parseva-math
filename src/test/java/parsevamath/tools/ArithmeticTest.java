@@ -39,7 +39,7 @@ public class ArithmeticTest {
         final String expression = "2 + 2";
         final Double expected = 4.0;
         final Double actual = Main.evaluate(expression);
-        assertThat(expected).isEqualTo(actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
@@ -47,7 +47,7 @@ public class ArithmeticTest {
         final String expression = "2 - 2";
         final Double expected = 0.0;
         final Double actual = Main.evaluate(expression);
-        assertThat(expected).isEqualTo(actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
@@ -55,7 +55,7 @@ public class ArithmeticTest {
         final String expression = "2 / 2";
         final Double expected = 1.0;
         final Double actual = Main.evaluate(expression);
-        assertThat(expected).isEqualTo(actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
@@ -63,7 +63,7 @@ public class ArithmeticTest {
         final String expression = "2 * 3";
         final Double expected = 6.0;
         final Double actual = Main.evaluate(expression);
-        assertThat(expected).isEqualTo(actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
@@ -71,7 +71,7 @@ public class ArithmeticTest {
         final String expression = "sqrt(7)";
         final Double expected = 2.6457513110645907;
         final Double actual = Main.evaluate(expression);
-        assertThat(expected).isEqualTo(actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
@@ -79,7 +79,7 @@ public class ArithmeticTest {
         final String expression = "sin(7)";
         final Double expected = StrictMath.sin(7.0);
         final Double actual = Main.evaluate(expression);
-        assertThat(expected).isEqualTo(actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
@@ -87,7 +87,7 @@ public class ArithmeticTest {
         final String expression = "sqrt(7) + (2*3*6) + sin(32)";
         final Double expected = 2.6457513110645907 + 2 * 3 * 6 + StrictMath.sin(32.0);
         final Double actual = Main.evaluate(expression);
-        assertThat(expected).isEqualTo(actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
@@ -95,7 +95,7 @@ public class ArithmeticTest {
         final String expression = "2 + -1";
         final Double expected = 1.0;
         final Double actual = Main.evaluate(expression);
-        assertThat(expected).isEqualTo(actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
@@ -103,7 +103,7 @@ public class ArithmeticTest {
         final String expression = "0/0";
         final Double expected = Double.NaN;
         final Double actual = Main.evaluate(expression);
-        assertThat(expected).isEqualTo(actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
@@ -111,7 +111,7 @@ public class ArithmeticTest {
         final String expression = "abs(-30.0)";
         final Double expected = 30.0;
         final Double actual = Main.evaluate(expression);
-        assertThat(expected).isEqualTo(actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
@@ -119,7 +119,7 @@ public class ArithmeticTest {
         final String expression = "42.0";
         final Double expected = 42.0;
         final Double actual = Main.evaluate(expression);
-        assertThat(expected).isEqualTo(actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
@@ -127,7 +127,7 @@ public class ArithmeticTest {
         final String expression = "pow(2.0,2.0)";
         final Double expected = StrictMath.pow(2.0, 2.0);
         final Double actual = Main.evaluate(expression);
-        assertThat(expected).isEqualTo(actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
@@ -135,7 +135,31 @@ public class ArithmeticTest {
         final String expression = "13!";
         final Double expected = MathUtils.getFactorial(13.0);
         final Double actual = Main.evaluate(expression);
-        assertThat(expected).isEqualTo(actual);
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    void testNestedExpressionFunctionCall() {
+        final String expression = "sqrt(2 + 2)";
+        final Double expected = 2.0;
+        final Double actual = Main.evaluate(expression);
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    void testNestedExpressionFunctionCallComplex() {
+        final String expression = "sqrt(sin(0) + 20 + sqrt(25))";
+        final Double expected = 5.0;
+        final Double actual = Main.evaluate(expression);
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    void testNestedExpressionFunctionCallTripleNested() {
+        final String expression = "sqrt(sin(0) + 20 + sqrt(50 - pow(5, 2)))";
+        final Double expected = 5.0;
+        final Double actual = Main.evaluate(expression);
+        assertThat(actual).isEqualTo(expected);
     }
 
 }

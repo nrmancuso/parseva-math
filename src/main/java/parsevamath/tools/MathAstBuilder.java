@@ -28,14 +28,9 @@
 
 package parsevamath.tools;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Locale;
 
 import org.antlr.v4.runtime.Token;
-import org.tinylog.Logger;
 
 import parsevamath.tools.grammar.MathBaseVisitor;
 import parsevamath.tools.grammar.MathLexer;
@@ -127,34 +122,14 @@ public class MathAstBuilder
      */
     @Override
     public ExpressionNode visitFuncExpr(MathParser.FuncExprContext ctx) {
-        final String methodName = ctx.func.getText();
-
-        // Node to return
         final MethodNode methodNode = new MethodNode();
-        final List<Double> arguments = new ArrayList<>();
-        final List<MathParser.ExprContext> exprContexts = ctx.expr();
+        methodNode.setFunctionName(ctx.func.getText());
 
-        exprContexts.forEach(exprContext -> {
-            arguments.add(ParsevaUtils.extractValue(visit(exprContext)));
-        });
+        // Each COMMA token delimits an argument.
+        final int numberOfArguments = ctx.COMMA().size();
 
-        methodNode.setArguments(arguments);
-
-        try {
-            // Here we fill array with double.class, since this is
-            // what all Math methods accept as parameters. The size
-            // of this array is the number of arguments to the function.
-            final Class<?>[] paramTypes = new Class[arguments.size()];
-            Arrays.fill(paramTypes, double.class);
-
-            // Use reflection to get Math method
-            final Method method = Math.class.getMethod(methodName, paramTypes);
-            methodNode.setFunction(method);
-        }
-        catch (NoSuchMethodException noSuchMethodException) {
-            final String infoString = "Failed to get 'java.lang.Math' method '"
-                + methodName + "'";
-            Logger.info(infoString, noSuchMethodException);
+        for (int i = 0; i <= numberOfArguments; i++) {
+            methodNode.addArgument(visit(ctx.expr(i)));
         }
 
         return methodNode;
