@@ -99,12 +99,15 @@ public class HomogeneousAstVisitor
         final Token token = ctx.op;
         final MathAstNode astNode = new MathAstNode();
         astNode.setText(ctx.getText());
+
         final int tokenType = switch (token.getType()) {
             case MathLexer.OP_ADD -> TokenTypes.OP_ADD;
             case MathLexer.OP_SUB -> TokenTypes.NEGATE;
-            default -> throw new IllegalStateException(UNEXPECTED_TOKEN
+            default ->
+                throw new IllegalStateException(UNEXPECTED_TOKEN
                 + token.getType());
         };
+
         astNode.setTokenType(tokenType);
         astNode.addChild(visit(ctx.expr()));
         astNode.getChildren()
@@ -124,13 +127,22 @@ public class HomogeneousAstVisitor
         astNode.setText(ctx.func.getText());
         astNode.setTokenType(TokenTypes.FUNCTION);
 
+        final MathAstNode leftParen = new MathAstNode();
+        leftParen.setText(ctx.lparen.getText());
+        leftParen.setTokenType(TokenTypes.LPAREN);
+        astNode.addChild(leftParen);
+
         final List<MathParser.ExprContext> exprContexts = ctx.expr();
         exprContexts.forEach(exprContext -> {
-            final MathAstNode childNode = new MathAstNode();
-            childNode.setText(exprContext.getText());
-            childNode.setTokenType(TokenTypes.NUM);
-            astNode.addChild(childNode);
+            astNode.addChild(visit(exprContext));
         });
+
+        astNode.getChildren().forEach(child -> child.setParent(astNode));
+
+        final MathAstNode rightParen = new MathAstNode();
+        rightParen.setText(ctx.rparen.getText());
+        rightParen.setTokenType(TokenTypes.RPAREN);
+        astNode.addChild(rightParen);
 
         return astNode;
     }
@@ -162,14 +174,15 @@ public class HomogeneousAstVisitor
         leftParen.setTokenType(TokenTypes.LPAREN);
         leftParen.addChild(visit(ctx.expr()));
 
-        final MathAstNode rightParen = new MathAstNode();
-        rightParen.setText(ctx.rparen.getText());
-        rightParen.setTokenType(TokenTypes.RPAREN);
-        leftParen.addChild(rightParen);
-
         leftParen.getChildren().forEach(child -> {
             child.setParent(leftParen);
         });
+
+        final MathAstNode rightParen = new MathAstNode();
+        rightParen.setText(ctx.rparen.getText());
+        rightParen.setTokenType(TokenTypes.RPAREN);
+        rightParen.setParent(leftParen);
+        leftParen.addChild(rightParen);
 
         return leftParen;
     }
