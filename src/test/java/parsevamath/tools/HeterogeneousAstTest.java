@@ -28,31 +28,27 @@
 
 package parsevamath.tools;
 
-/**
- * This class represents a numerical expression node in the ast.
- */
-class NumberNode implements ExpressionNode {
+import static com.google.common.truth.Truth.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-    /**
-     * The numerical value of this number node.
-     */
-    private Double value;
+import org.junit.jupiter.api.Test;
 
-    /**
-     * Constructor for NumberNode class.
-     *
-     * @param value the numerical value of this node
-     */
-    NumberNode(Double value) {
-        this.value = value;
-    }
+public class HeterogeneousAstTest {
 
-    /**
-     * Gets the value of this number node.
-     *
-     * @return the value of this node
-     */
-    public Double getValue() {
-        return value;
+    @Test
+    void testAbstractMathAstVisitorException() {
+        final EvaluateExpressionVisitor visitor =
+            new EvaluateExpressionVisitor();
+        final ExpressionNode expressionNode = new ExpressionNode() {};
+
+        final String expected = "Unexpected value:"
+            + " class parsevamath.tools.HeterogeneousAstTest$1";
+
+        final IllegalStateException actual = assertThrows(IllegalStateException.class,
+            () -> visitor.visit(expressionNode));
+
+        assertThat(actual)
+            .hasMessageThat()
+            .isEqualTo(expected);
     }
 }

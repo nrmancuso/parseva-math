@@ -28,7 +28,9 @@
 
 package parsevamath.tools;
 
+import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -42,7 +44,7 @@ import org.junit.jupiter.api.Test;
 
 import parsevamath.tools.grammar.MathParser;
 
-public class TokenTest {
+public class TokenUtilTest {
 
     @Test
     void testTokenNumber() {
@@ -110,4 +112,29 @@ public class TokenTest {
         });
     }
 
+    @Test
+    void testUndefinedTokenName() {
+        final int undefinedTokenID = Integer.MAX_VALUE;
+        final String expected = "Token name is not defined for ID: " + undefinedTokenID;
+
+        final IllegalArgumentException actual = assertThrows(IllegalArgumentException.class,
+            () -> TokenUtil.getTokenName(undefinedTokenID));
+
+        assertThat(actual)
+            .hasMessageThat()
+            .isEqualTo(expected);
+    }
+
+    @Test
+    void testUndefinedTokenID() {
+        final String undefinedTokenName = "UndefinedTokenName";
+        final String expected = "Token ID is not defined for name: " + undefinedTokenName;
+
+        final IllegalArgumentException actual = assertThrows(IllegalArgumentException.class,
+            () -> TokenUtil.getTokenID(undefinedTokenName));
+
+        assertThat(actual)
+            .hasMessageThat()
+            .isEqualTo(expected);
+    }
 }

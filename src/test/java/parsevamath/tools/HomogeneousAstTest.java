@@ -29,8 +29,13 @@
 package parsevamath.tools;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.antlr.v4.runtime.CommonToken;
 import org.junit.jupiter.api.Test;
+
+import parsevamath.tools.grammar.MathLexer;
+import parsevamath.tools.grammar.MathParser;
 
 public class HomogeneousAstTest {
 
@@ -48,6 +53,43 @@ public class HomogeneousAstTest {
             ParsevaUtils.toStringTree(Main.buildMathAstNodeTree(expression));
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    void testUnaryAddition() {
+        final String expression = "+2";
+        final String expected = """
+            '- OP_ADD -> +
+               '- NUM -> 2
+            """;
+        final String actual =
+            ParsevaUtils.toStringTree(Main.buildMathAstNodeTree(expression));
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    void testDivisionAndUnary() {
+        final String expression = "(-2) + (2) + (2/2)";
+        final String expected = """
+            '- OP_ADD -> +
+               |- OP_ADD -> +
+               |  |- LPAREN -> (
+               |  |  |- NEGATE -> -
+               |  |  |  '- NUM -> 2
+               |  |  '- RPAREN -> )
+               |  '- LPAREN -> (
+               |     |- NUM -> 2
+               |     '- RPAREN -> )
+               '- LPAREN -> (
+                  |- OP_DIV -> /
+                  |  |- NUM -> 2
+                  |  '- NUM -> 2
+                  '- RPAREN -> )
+            """;
+        final String actual =
+            ParsevaUtils.toStringTree(Main.buildMathAstNodeTree(expression));
+        assertThat(actual).isEqualTo(expected);
+    }
+
 
     @Test
     void testConstExpressionAst() {
@@ -219,5 +261,43 @@ public class HomogeneousAstTest {
         final String actual =
             ParsevaUtils.toStringTree(Main.buildMathAstNodeTree(expression));
         assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    void testInfixExpressionException() {
+        final MathParser.ExprContext ctx =
+            new MathParser.ExprContext();
+        final MathParser.InfixExprContext infixExprContext =
+            new MathParser.InfixExprContext(ctx);
+        infixExprContext.op = new CommonToken(MathLexer.COMMA);
+        final HomogeneousAstVisitor visitor = new HomogeneousAstVisitor();
+
+        final String expected = "Unexpected token: COMMA";
+
+        IllegalStateException actual = assertThrows(IllegalStateException.class,
+            () -> visitor.visitInfixExpr(infixExprContext));
+
+        assertThat(actual)
+            .hasMessageThat()
+            .isEqualTo(expected);
+    }
+
+    @Test
+    void testUnaryExpressionException() {
+        final MathParser.ExprContext ctx =
+            new MathParser.ExprContext();
+        final MathParser.UnaryExprContext unaryExprContext =
+            new MathParser.UnaryExprContext(ctx);
+        unaryExprContext.op = new CommonToken(MathLexer.COMMA);
+        final HomogeneousAstVisitor visitor = new HomogeneousAstVisitor();
+
+        final String expected = "Unexpected token: COMMA";
+
+        final IllegalStateException actual = assertThrows(IllegalStateException.class,
+            () -> visitor.visitUnaryExpr(unaryExprContext));
+
+        assertThat(actual)
+            .hasMessageThat()
+            .isEqualTo(expected);
     }
 }
