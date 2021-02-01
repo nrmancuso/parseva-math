@@ -108,6 +108,7 @@ public class HomogeneousAstTest {
             '- FUNCTION -> pow
                |- LPAREN -> (
                |- NUM -> 2.0
+               |- COMMA -> ,
                |- NUM -> 2.0
                '- RPAREN -> )
             """;
@@ -175,6 +176,7 @@ public class HomogeneousAstTest {
                |     |- FUNCTION -> pow
                |     |  |- LPAREN -> (
                |     |  |- NUM -> 4
+               |     |  |- COMMA -> ,
                |     |  |- NUM -> 4
                |     |  '- RPAREN -> )
                |     '- NUM -> 22
@@ -208,6 +210,7 @@ public class HomogeneousAstTest {
                |     |  '- FUNCTION -> pow
                |     |     |- LPAREN -> (
                |     |     |- NUM -> 5
+               |     |     |- COMMA -> ,
                |     |     |- NUM -> 2
                |     |     '- RPAREN -> )
                |     '- RPAREN -> )
@@ -217,7 +220,4 @@ public class HomogeneousAstTest {
             ParsevaUtils.toStringTree(Main.buildMathAstNodeTree(expression));
         assertThat(actual).isEqualTo(expected);
     }
-
-
-
 }

@@ -28,9 +28,11 @@
 
 package parsevamath.tools;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.tree.TerminalNode;
 
 import parsevamath.tools.grammar.MathBaseVisitor;
 import parsevamath.tools.grammar.MathLexer;
@@ -133,16 +135,23 @@ public class HomogeneousAstVisitor
         astNode.addChild(leftParen);
 
         final List<MathParser.ExprContext> exprContexts = ctx.expr();
+        final Iterator<TerminalNode> commaNodes = ctx.COMMA().iterator();
         exprContexts.forEach(exprContext -> {
             astNode.addChild(visit(exprContext));
-        });
 
-        astNode.getChildren().forEach(child -> child.setParent(astNode));
+            if (commaNodes.hasNext()) {
+                final MathAstNode commaNode = new MathAstNode();
+                commaNode.setText(commaNodes.next().getText());
+                commaNode.setTokenType(TokenTypes.COMMA);
+                astNode.addChild(commaNode);
+            }
+        });
 
         final MathAstNode rightParen = new MathAstNode();
         rightParen.setText(ctx.rparen.getText());
         rightParen.setTokenType(TokenTypes.RPAREN);
         astNode.addChild(rightParen);
+        astNode.getChildren().forEach(child -> child.setParent(astNode));
 
         return astNode;
     }
