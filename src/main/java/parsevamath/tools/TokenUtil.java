@@ -78,7 +78,7 @@ public final class TokenUtil {
     public static String getTokenName(int id) {
         final String name = TOKEN_VALUE_TO_NAME.get(id);
         if (name == null) {
-            throw new IllegalArgumentException("Token name is not assigned!");
+            throw new IllegalArgumentException("Token name is not defined for ID: " + id);
         }
         return name;
     }
@@ -101,8 +101,7 @@ public final class TokenUtil {
             tokenID = tokenEntry.getKey();
         }
         else {
-            throw new IllegalArgumentException("Token name does not exist "
-                + "in 'TOKEN_VALUE_TO_NAME'");
+            throw new IllegalArgumentException("Token ID is not defined for name: " + name);
         }
 
         return tokenID;

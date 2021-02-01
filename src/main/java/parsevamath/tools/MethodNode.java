@@ -82,15 +82,6 @@ class MethodNode implements ExpressionNode {
     }
 
     /**
-     * Sets the numerical arguments for this node to evaluate.
-     *
-     * @param arguments numerical expressions
-     */
-    public void setArguments(List<ExpressionNode> arguments) {
-        this.arguments.addAll(arguments);
-    }
-
-    /**
      * Add argument (ExpressionNode) to list of arguments.
      *
      * @param node ExpressioNode to add

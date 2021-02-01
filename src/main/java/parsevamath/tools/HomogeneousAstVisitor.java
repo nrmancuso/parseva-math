@@ -79,7 +79,7 @@ public class HomogeneousAstVisitor
             case MathLexer.OP_MUL -> TokenTypes.OP_MUL;
             case MathLexer.OP_DIV -> TokenTypes.OP_DIV;
             default -> throw new IllegalStateException(UNEXPECTED_TOKEN
-                + token.getType());
+                + TokenUtil.getTokenName(token.getType()));
         };
         astNode.setTokenType(tokenType);
         astNode.addChild(visit(ctx.left));
@@ -100,14 +100,14 @@ public class HomogeneousAstVisitor
     public MathAstNode visitUnaryExpr(MathParser.UnaryExprContext ctx) {
         final Token token = ctx.op;
         final MathAstNode astNode = new MathAstNode();
-        astNode.setText(ctx.getText());
+        astNode.setText(ctx.op.getText());
 
         final int tokenType = switch (token.getType()) {
             case MathLexer.OP_ADD -> TokenTypes.OP_ADD;
             case MathLexer.OP_SUB -> TokenTypes.NEGATE;
             default ->
                 throw new IllegalStateException(UNEXPECTED_TOKEN
-                + token.getType());
+                + TokenUtil.getTokenName(token.getType()));
         };
 
         astNode.setTokenType(tokenType);
