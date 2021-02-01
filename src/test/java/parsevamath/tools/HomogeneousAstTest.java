@@ -69,7 +69,9 @@ public class HomogeneousAstTest {
             '- OP_ADD -> +
                |- NUM -> 2
                '- FUNCTION -> sqrt
-                  '- NUM -> 4
+                  |- LPAREN -> (
+                  |- NUM -> 4
+                  '- RPAREN -> )
             """;
         final String actual =
             ParsevaUtils.toStringTree(Main.buildMathAstNodeTree(expression));
@@ -104,8 +106,10 @@ public class HomogeneousAstTest {
         final String expression = "pow(2.0,2.0)";
         final String expected = """
             '- FUNCTION -> pow
+               |- LPAREN -> (
                |- NUM -> 2.0
-               '- NUM -> 2.0
+               |- NUM -> 2.0
+               '- RPAREN -> )
             """;
         final String actual =
             ParsevaUtils.toStringTree(Main.buildMathAstNodeTree(expression));
@@ -140,7 +144,9 @@ public class HomogeneousAstTest {
                |  |  '- NUM -> 5
                |  '- RPAREN -> )
                '- FUNCTION -> sin
-                  '- NUM -> 2.5
+                  |- LPAREN -> (
+                  |- NUM -> 2.5
+                  '- RPAREN -> )
             """;
         final String actual =
             ParsevaUtils.toStringTree(Main.buildMathAstNodeTree(expression));
@@ -158,21 +164,60 @@ public class HomogeneousAstTest {
                |  |  |- OP_ADD -> +
                |  |  |  |- NUM -> 2
                |  |  |  '- FUNCTION -> sin
-               |  |  |     '- NUM -> 1.24
+               |  |  |     |- LPAREN -> (
+               |  |  |     |- NUM -> 1.24
+               |  |  |     '- RPAREN -> )
                |  |  '- FUNCTION -> sqrt
-               |  |     '- NUM -> 5
+               |  |     |- LPAREN -> (
+               |  |     |- NUM -> 5
+               |  |     '- RPAREN -> )
                |  '- OP_MUL -> *
                |     |- FUNCTION -> pow
+               |     |  |- LPAREN -> (
                |     |  |- NUM -> 4
-               |     |  '- NUM -> 4
+               |     |  |- NUM -> 4
+               |     |  '- RPAREN -> )
                |     '- NUM -> 22
                '- FUNCTION -> sqrt
-                  '- NUM -> 9
+                  |- LPAREN -> (
+                  |- NUM -> 9
+                  '- RPAREN -> )
             """;
         final String actual =
             ParsevaUtils.toStringTree(Main.buildMathAstNodeTree(expression));
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    void testNestedFunctionCalls() {
+        final String expression = "sqrt(sin(0) + 20 + sqrt(50 - pow(5, 2)))";
+        final String expected = """
+            '- FUNCTION -> sqrt
+               |- LPAREN -> (
+               |- OP_ADD -> +
+               |  |- OP_ADD -> +
+               |  |  |- FUNCTION -> sin
+               |  |  |  |- LPAREN -> (
+               |  |  |  |- NUM -> 0
+               |  |  |  '- RPAREN -> )
+               |  |  '- NUM -> 20
+               |  '- FUNCTION -> sqrt
+               |     |- LPAREN -> (
+               |     |- OP_SUB -> -
+               |     |  |- NUM -> 50
+               |     |  '- FUNCTION -> pow
+               |     |     |- LPAREN -> (
+               |     |     |- NUM -> 5
+               |     |     |- NUM -> 2
+               |     |     '- RPAREN -> )
+               |     '- RPAREN -> )
+               '- RPAREN -> )
+            """;
+        final String actual =
+            ParsevaUtils.toStringTree(Main.buildMathAstNodeTree(expression));
+        assertThat(actual).isEqualTo(expected);
+    }
+
 
 
 }
