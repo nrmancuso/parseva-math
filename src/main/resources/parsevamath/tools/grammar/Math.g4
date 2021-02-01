@@ -17,7 +17,7 @@ expr
     |   op=( OP_ADD | OP_SUB ) expr                    # unaryExpr
     |   left=expr op=( OP_MUL | OP_DIV ) right=expr    # infixExpr
     |   left=expr op=( OP_ADD | OP_SUB ) right=expr    # infixExpr
-    |   func=ID '(' expr (COMMA expr)* ')'                 # funcExpr
+    |   func=ID lparen=LPAREN expr (COMMA expr)* rparen=RPAREN  # funcExpr
     |   value=NUM                            # numberExpr
     |   constant                            #constExpr
     |   expr fact=OP_FACT                        #factorialExpr
