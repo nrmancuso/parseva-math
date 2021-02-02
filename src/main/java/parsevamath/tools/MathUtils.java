@@ -28,15 +28,62 @@
 
 package parsevamath.tools;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Utility methods for mathematical operations.
  */
 public final class MathUtils {
 
+    /** Literal names from MathParser. */
+    private static final List<String> LITERAL_NAMES;
+
+    /** Symbolic names from MathParser. */
+    private static final List<String> SYMBOLIC_NAMES;
+
+    static {
+        LITERAL_NAMES =
+            Arrays.asList(
+                null, "'e'", "'E'", "'pi'", "'PI'",
+                "'+'", "'-'", "'*'", "'/'", "'!'",
+                "'('", "')'", null, null, null,
+                "','"
+            );
+
+        SYMBOLIC_NAMES =
+            Arrays.asList(
+                null, null, null, null, null,
+                "OP_ADD", "OP_SUB", "OP_MUL",
+                "OP_DIV", "OP_FACT", "LPAREN",
+                "RPAREN", "NUM", "ID", "WS",
+                "COMMA", "NEGATE", "FUNCTION",
+                "CONSTANT"
+            );
+    }
+
     /**
      * Prevent instantiation.
      */
     private MathUtils() {
+    }
+
+    /**
+     * Gets all symbolic names that should be in MathParser.
+     *
+     * @return names of all symbolic names in parser
+     */
+    public static String[] getSymbolicNames() {
+        return SYMBOLIC_NAMES.toArray(new String[0]);
+    }
+
+    /**
+     * Gets all literal names that should be in MathParser.
+     *
+     * @return names of all literal names in parser
+     */
+    public static String[] getLiteralNames() {
+        return LITERAL_NAMES.toArray(new String[0]);
     }
 
     /**
