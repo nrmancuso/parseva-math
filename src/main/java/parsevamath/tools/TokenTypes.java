@@ -92,12 +92,12 @@ public final class TokenTypes {
     public static final int OP_FACT = MathParser.OP_FACT;
 
     /**
-     * This is the factorial node token.
+     * This is the left parenthesis node token.
      */
     public static final int LPAREN = MathParser.LPAREN;
 
     /**
-     * This is the factorial node token.
+     * This is the right parenthesis node token.
      */
     public static final int RPAREN = MathParser.RPAREN;
 
