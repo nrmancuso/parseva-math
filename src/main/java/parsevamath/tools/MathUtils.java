@@ -88,7 +88,7 @@ public final class MathUtils {
 
     /**
      * This method calculates the factorial of a given value.
-     * Since parseva-math deal exclusively with doubles,
+     * Since parseva-math deals exclusively with doubles,
      * this method also accepts and returns a double.
      *
      * @param value value to calculate the factorial of
