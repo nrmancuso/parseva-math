@@ -33,7 +33,7 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 import parsevamath.tools.grammar.MathParser;
 
 /**
- * A ast visitor, used for constructing a homogeneous ast.
+ * An ast visitor, used for constructing a homogeneous ast.
  */
 public interface HomogeneousAstVisitorInterface extends ParseTreeVisitor<MathAstNode> {
 
