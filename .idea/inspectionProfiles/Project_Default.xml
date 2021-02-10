@@ -908,14 +908,6 @@
       <option name="m_ignoreIgnoreParameter" value="true" />
     </inspection_tool>
     <inspection_tool class="EmptyCatchBlockJS" enabled="true" level="ERROR" enabled_by_default="true" />
-    <inspection_tool class="EmptyClass" enabled="true" level="WARNING" enabled_by_default="true">
-      <option name="ignorableAnnotations">
-        <value />
-      </option>
-      <option name="ignoreClassWithParameterization" value="false" />
-      <option name="ignoreThrowables" value="true" />
-      <option name="commentsAreContent" value="true" />
-    </inspection_tool>
     <inspection_tool class="EmptyDirectory" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="EmptyEventHandler" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="EmptyFinallyBlock" enabled="true" level="ERROR" enabled_by_default="true" />
