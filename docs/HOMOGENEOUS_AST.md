@@ -1,4 +1,4 @@
-# How parseva-math builds a Homogeneous Abstract Syntax Tree
+# Homogeneous Abstract Syntax Tree
 
 ## Visitor Interface Generation
 **First**, we need to have a grammar, such as [`Math.g4`](https://github.com/nmancus1/parseva-math/blob/main/src/main/resources/parsevamath/tools/grammar/Math.g4),
