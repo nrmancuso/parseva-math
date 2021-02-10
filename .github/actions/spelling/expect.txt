@@ -30,6 +30,7 @@ Bpmn
 BSR
 BXOR
 Cacheable
+cachefile
 Cdi
 Cfml
 charset
@@ -125,6 +126,7 @@ Innerclass
 instanceof
 Intelli
 intellij
+interp
 itemvalue
 jacoco
 javac
@@ -241,6 +243,7 @@ rawtypes
 RBRACE
 RBRACK
 reactivex
+README
 Readonly
 rebased
 regex
