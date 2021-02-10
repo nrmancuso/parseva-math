@@ -71,7 +71,7 @@ public class HomogeneousAstVisitor
     @Override
     public MathAstNode visitInfixExpr(MathParser.InfixExprContext ctx) {
         final Token token = ctx.op;
-        final MathAstNode astNode = new MathAstNode();
+        final MathAstNode astNode = new MathAstNodeImpl();
         astNode.setText(ctx.op.getText());
         final int tokenType = switch (token.getType()) {
             case MathLexer.OP_ADD -> TokenTypes.OP_ADD;
@@ -99,7 +99,7 @@ public class HomogeneousAstVisitor
     @Override
     public MathAstNode visitUnaryExpr(MathParser.UnaryExprContext ctx) {
         final Token token = ctx.op;
-        final MathAstNode astNode = new MathAstNode();
+        final MathAstNode astNode = new MathAstNodeImpl();
         astNode.setText(ctx.op.getText());
 
         final int tokenType = switch (token.getType()) {
@@ -125,11 +125,11 @@ public class HomogeneousAstVisitor
      */
     @Override
     public MathAstNode visitFuncExpr(MathParser.FuncExprContext ctx) {
-        final MathAstNode astNode = new MathAstNode();
+        final MathAstNode astNode = new MathAstNodeImpl();
         astNode.setText(ctx.func.getText());
         astNode.setTokenType(TokenTypes.FUNCTION);
 
-        final MathAstNode leftParen = new MathAstNode();
+        final MathAstNode leftParen = new MathAstNodeImpl();
         leftParen.setText(ctx.lparen.getText());
         leftParen.setTokenType(TokenTypes.LPAREN);
         astNode.addChild(leftParen);
@@ -140,14 +140,14 @@ public class HomogeneousAstVisitor
             astNode.addChild(visit(exprContext));
 
             if (commaNodes.hasNext()) {
-                final MathAstNode commaNode = new MathAstNode();
+                final MathAstNode commaNode = new MathAstNodeImpl();
                 commaNode.setText(commaNodes.next().getText());
                 commaNode.setTokenType(TokenTypes.COMMA);
                 astNode.addChild(commaNode);
             }
         });
 
-        final MathAstNode rightParen = new MathAstNode();
+        final MathAstNode rightParen = new MathAstNodeImpl();
         rightParen.setText(ctx.rparen.getText());
         rightParen.setTokenType(TokenTypes.RPAREN);
         astNode.addChild(rightParen);
@@ -164,7 +164,7 @@ public class HomogeneousAstVisitor
      */
     @Override
     public MathAstNode visitNumberExpr(MathParser.NumberExprContext ctx) {
-        final MathAstNode astNode = new MathAstNode();
+        final MathAstNode astNode = new MathAstNodeImpl();
         astNode.setText(ctx.getText());
         astNode.setTokenType(TokenTypes.NUM);
         return astNode;
@@ -178,7 +178,7 @@ public class HomogeneousAstVisitor
      */
     @Override
     public MathAstNode visitParensExpr(MathParser.ParensExprContext ctx) {
-        final MathAstNode leftParen = new MathAstNode();
+        final MathAstNode leftParen = new MathAstNodeImpl();
         leftParen.setText(ctx.lparen.getText());
         leftParen.setTokenType(TokenTypes.LPAREN);
         leftParen.addChild(visit(ctx.expr()));
@@ -187,7 +187,7 @@ public class HomogeneousAstVisitor
             child.setParent(leftParen);
         });
 
-        final MathAstNode rightParen = new MathAstNode();
+        final MathAstNode rightParen = new MathAstNodeImpl();
         rightParen.setText(ctx.rparen.getText());
         rightParen.setTokenType(TokenTypes.RPAREN);
         rightParen.setParent(leftParen);
@@ -204,7 +204,7 @@ public class HomogeneousAstVisitor
      */
     @Override
     public MathAstNode visitFactorialExpr(MathParser.FactorialExprContext ctx) {
-        final MathAstNode astNode = new MathAstNode();
+        final MathAstNode astNode = new MathAstNodeImpl();
         astNode.setText(ctx.fact.getText());
         astNode.setTokenType(TokenTypes.OP_FACT);
         astNode.addChild(visit(ctx.expr()));
@@ -230,7 +230,7 @@ public class HomogeneousAstVisitor
      */
     @Override
     public MathAstNode visitConstant(MathParser.ConstantContext ctx) {
-        final MathAstNode astNode = new MathAstNode();
+        final MathAstNode astNode = new MathAstNodeImpl();
         astNode.setText(ctx.getText());
         astNode.setTokenType(TokenTypes.CONSTANT);
         return astNode;
