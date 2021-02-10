@@ -18,6 +18,7 @@ expr
     |   expr fact=OP_FACT                                        # factorialExpr
     ;
 ```
+ _Note the direct left recursion that the `expr` uses, this keeps this rule compact and tidy._
 
 Each alternative of `expr` has a `#` label, such as `# numberExpr`; this tells ANTLR to generate a 
 separate visit method for this alternative.  Notice the rule label for `NUM` in `numberExpr`:
