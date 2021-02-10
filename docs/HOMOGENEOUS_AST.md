@@ -93,5 +93,5 @@ Will create a homogeneous abstract syntax tree like this:
 
 We can see that this abstract syntax tree has three nodes:
 1. An `OP_ADD` node, representing the addition operation token.
-2. A "NUM" node, which is the left child of the `OP_ADD` token.
-3. Another "NUM" node, which is the right child of the `OP_ADD` token.
+2. A `NUM` node, which is the left child of the `OP_ADD` token.
+3. Another `NUM` node, which is the right child of the `OP_ADD` token.
