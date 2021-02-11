@@ -233,3 +233,18 @@ build the AST within [Main.java](https://github.com/nmancus1/parseva-math/blob/m
         return new HomogeneousAstVisitor().visit(compilationUnit);
     }
 ```
+## Thoughts
+
+In pursuit of the best way to build a homogeneous AST with ANTLR4, I tried all of the following approaches:
+1. First build a heterogeneous AST, then transform it into a homogeneous AST. If there was a need for the heterogeneous 
+tree too, I see no issue with this approach, but for parseva-math, then just seemed like an extra step.
+2. Use actions, `@init` and `@after` blocks to keep `visit..context()` overridden methods to a minimum. 
+This made for a very messy grammar.
+3. The listener pattern; this was great if you do not need to set parent nodes, etc. However, for our homogeneous tree,
+we need to be able to traverse in any direction and track parent nodes.
+
+I have found the above procedure to be the cleanest and most easily maintained method for creating a homogeneous AST
+with ANTLR4. It is good to keep a context and action-free grammar, and handle all java code separately.  The ability
+to override the `visit...context()` methods as necessary to maintain a simple grammar helps keep changes atomic, and
+allows us to build the AST with no limitation.  We can easily rearrange elements, create imaginary tokens, and traverse
+the parsed rule contexts with our visitor.
