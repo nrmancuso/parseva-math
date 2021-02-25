@@ -1,6 +1,6 @@
 ![alt text](assets/logo_transparent.png)
 <h1 align="center"> parseva-math </h1> <br>
-<h4 align="center"> Compute mathematical expressions via abstract syntax tree. </h4><br>  
+<h4 align="center"> Compute and analyze expressions via abstract syntax tree. </h4><br>  
 <hr/>
 
  <a href="https://github.com/nmancus1/parseva-math/graphs/contributors">
@@ -12,13 +12,9 @@
 
 ## Introduction
 
-**parseva-math** is a small project that I have created to build my experience writing grammar 
-for and working with **ANTLR4**.  In a nutshell, parseva-math accepts a mathematical expression
-as a string value, and first builds an abstract syntax tree of the expression; then
-**parseva-math** walks the tree to evaluate the expression.  I was inspired to begin this
-project after finding very few _simple_ examples of building an abstract syntax tree with Java and 
-**ANTLR4**. This grammar and initial code is based off of [this](https://stackoverflow.com/a/29996191/) 
-awesome stack overflow post.
+**parseva-math** is a symbolic expression parsing tool, which can analyze and evaluate mathematical expressions. In a nutshell, parseva-math accepts a mathematical expression as a string value, and first builds a heterogeneous abstract syntax tree of the expression; then **parseva-math** walks this tree to evaluate the expression.  Parseva-math also supports building a [homogeneous 
+abstract syntax tree](https://github.com/nmancus1/parseva-math/blob/main/docs/HOMOGENEOUS_AST.md) and printing the result; this way expressions can be
+analyzed for structure and correctness.
 
 ## Getting Started
 You will need to have a version of the JDK >= 15 in order to build parseva-math.<br/><br/>
@@ -38,9 +34,10 @@ Note that `--enable-preview` is required for now, since parseva-math uses JDK15 
 **parseva-math** has two different modes of operation; interactive and command line.  Mathematical
 functions, such as logarithmic and trigonometric functions are currently supplied by 
 [java.lang.Math](https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html).
+<br>
+<br>
 
-
-#### Interactive
+### **Interactive Mode**
 To run **parseva-math** in the interactive mode, use `-i` or `--interact`:
 
 `java -jar --enable-preview target/parseva-math-<version>-SNAPSHOT-jar-with-dependencies.jar -i`
@@ -58,18 +55,46 @@ This will drop you into the parseva-math terminal, where you can evaluate expres
 ```
 
 To exit, simply press enter at an empty prompt.
+<br>
+<br>
 
-#### Evaluate via Command Line
+### **Evaluate via Command Line**
 
 To evaluate one expression via command line, use `-e "<expression>"` or 
 `--evaluate "<expression>"`:
-```
- java -jar --enable-preview target/parseva-math-<version>-SNAPSHOT-jar-with-dependencies.jar -e "atan(0.5)"
+```bash
+ ➜  java -jar --enable-preview target/parseva-math-<version>-SNAPSHOT-jar-with-dependencies.jar -e "atan(0.5)"
  = 0.463648
 ```
 **parseva-math** also supports the constants `pi` and `e`.
+<br>
+<br>
 
-#### Help
+### **Print Expression Tree**
+Using the `-t <expression>` or `--tree <expression>` allows users to tell parseva-math to construct a [homogeneous abstract syntax tree](https://github.com/nmancus1/parseva-math/blob/main/docs/HOMOGENEOUS_AST.md) using [MathAstNodes](https://github.com/nmancus1/parseva-math/blob/main/src/main/java/parsevamath/tools/MathAstNode.java), then walk the tree and print the results.   
+
+ Example:
+
+```bash
+➜  java -jar --enable-preview target/parseva-math-0.1-SNAPSHOT-jar-with-dependencies.jar -t "sin(sqrt(2.2) + pow(0.5,0.5))"
+'- FUNCTION -> sin
+   |- LPAREN -> (
+   |- OP_ADD -> +
+   |  |- FUNCTION -> sqrt
+   |  |  |- LPAREN -> (
+   |  |  |- NUM -> 2.2
+   |  |  '- RPAREN -> )
+   |  '- FUNCTION -> pow
+   |     |- LPAREN -> (
+   |     |- NUM -> 0.5
+   |     |- COMMA -> ,
+   |     |- NUM -> 0.5
+   |     '- RPAREN -> )
+   '- RPAREN -> )
+
+```
+
+### **Help**
 
 Usage help is available using `-h`, `--help`, or simply providing no arguments to **parseva-math**.
 
