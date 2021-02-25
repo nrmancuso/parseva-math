@@ -12,7 +12,7 @@
 
 ## Introduction
 
-**parseva-math** is a symbolic expression parsing tool, which can analyze and evaluate mathematical expressions. In a nutshell, parseva-math accepts a mathematical expression as a string value, and first builds a heterogeneous abstract syntax tree of the expression; then **parseva-math** walks this tree to evaluate the expression.  Parseva-math also supports building a [homogeneous 
+**parseva-math** is a symbolic expression parsing tool, which can analyze and evaluate mathematical expressions. In a nutshell, parseva-math accepts a mathematical expression as a string, and first builds a heterogeneous abstract syntax tree of the expression. Then, **parseva-math** walks the tree to evaluate the expression.  Parseva-math also supports building a [homogeneous 
 abstract syntax tree](https://github.com/nmancus1/parseva-math/blob/main/docs/HOMOGENEOUS_AST.md) and printing the result; this way expressions can be
 analyzed for structure and correctness.
 
