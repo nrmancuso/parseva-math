@@ -17,7 +17,7 @@ abstract syntax tree](https://github.com/nmancus1/parseva-math/blob/main/docs/HO
 analyzed for structure and correctness.
 
 ## Getting Started
-You will need to have a version of the JDK >= 15 in order to build parseva-math.<br/><br/>
+You will need to have a version of the JDK >= 17 in order to build parseva-math.<br/><br/>
 I plan to make a compiled jar once **parseva-math** reaches version 1.0.  Until then, you must
 clone this repository and build it yourself:\
 `git clone https://github.com/nmancus1/parseva-math.git && cd parseva-math`
@@ -157,7 +157,7 @@ Distributed under the [Unlicense](https://unlicense.org/).
 
 ## Built With
 * [ANTLR4](https://github.com/antlr/antlr4)
-* [OpenJDK15](https://openjdk.java.net/projects/jdk/15/)
+* [OpenJDK17](https://openjdk.java.net/projects/jdk/17/)
 * [Maven](https://maven.apache.org/)
 * [picocli](https://picocli.info/)
 
