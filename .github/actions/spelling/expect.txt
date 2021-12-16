@@ -38,6 +38,8 @@ charset
 cheatsheet
 checkerframework
 checkstyle
+cimg
+circleci
 Classloader
 Clickable
 Cloneable
@@ -63,6 +65,7 @@ Destructuring
 DOCTYPE
 Dpi
 Drawables
+Dskip
 dtds
 EArithmetic
 EFunction
