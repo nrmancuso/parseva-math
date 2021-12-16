@@ -8,8 +8,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Build
-          command: mvn -B -DskipTests clean package
+          name: assembly
+          command: mvn clean compile assembly:single
 
   verify:
     docker:
