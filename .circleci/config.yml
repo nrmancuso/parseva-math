@@ -1,0 +1,27 @@
+version: 2.1
+
+jobs:
+  build:
+    # From https://circleci.com/developer/images/image/cimg/openjdk
+    docker:
+      - image: cimg/openjdk:17.0.1
+    steps:
+      - checkout
+      - run:
+          name: Build
+          command: mvn -B -DskipTests clean package
+
+  verify:
+    docker:
+      - image: cimg/openjdk:17.0.1
+    steps:
+      - checkout
+      - run:
+          name: clean verify
+          command: mvn clean verify
+
+workflows:
+  maven:
+    jobs:
+      - build
+      - verify
