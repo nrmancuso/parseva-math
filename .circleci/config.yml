@@ -20,8 +20,18 @@ jobs:
           name: clean verify
           command: mvn clean verify
 
+  sonar:
+    docker:
+      - image: cimg/openjdk:17.0.1
+    steps:
+      - checkout
+      - run:
+          name: Analyze on SonarCloud
+          command: mvn verify sonar:sonar -Dsonar.projectKey=nmancus1_parseva-math
+
 workflows:
   maven:
     jobs:
       - build
       - verify
+      - sonar
