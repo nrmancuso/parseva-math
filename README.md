@@ -8,6 +8,7 @@
     <a href="https://github.com/nmancus1/parseva-math/commits/main">
         <img src="https://img.shields.io/github/commit-activity/m/nmancus1/parseva-math" /></a>
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=nmancus1_parseva-math&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=nmancus1_parseva-math)
 
 
 ## Introduction
