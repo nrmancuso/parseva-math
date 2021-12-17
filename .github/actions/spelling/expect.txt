@@ -271,6 +271,7 @@ singleline
 slf
 Sms
 sonarcloud
+sonarlint
 sourceforge
 spotbugs
 sql
