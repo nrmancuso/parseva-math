@@ -66,6 +66,7 @@ DOCTYPE
 Dpi
 Drawables
 Dskip
+Dsonar
 dtds
 EArithmetic
 EFunction
@@ -269,6 +270,7 @@ Simplifiable
 singleline
 slf
 Sms
+sonarcloud
 sourceforge
 spotbugs
 sql
