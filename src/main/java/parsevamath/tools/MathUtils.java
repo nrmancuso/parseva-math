@@ -101,4 +101,8 @@ public final class MathUtils {
         }
         return factorial;
     }
+
+    private static void helper(boolean codeSmell) {
+        System.out.println("unused parameters and boolean parameters are a code smell!");
+    }
 }
